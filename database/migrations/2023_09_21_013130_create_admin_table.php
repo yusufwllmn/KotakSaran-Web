@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->increments('id_admin');
-            $table->string('name');
-            $table->text('address');
-            $table->string('phone', 20);
+            $table->string('nama');
+            $table->text('alamat');
+            $table->string('telephone', 20);
             $table->unsignedInteger('id_user');
             $table->timestamps();
 

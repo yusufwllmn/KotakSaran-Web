@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reporter', function (Blueprint $table) {
-            $table->increments('id_reporter');
-            $table->string('id_identity', 20);
-            $table->string('name');
-            $table->string('category');
-            $table->text('address')->nullable();
-            $table->string('phone', 20)->nullable();
+        Schema::create('pelapor', function (Blueprint $table) {
+            $table->increments('id_pelapor');
+            $table->string('id_identitas', 20);
+            $table->string('nama');
+            $table->string('kategori');
+            $table->text('alamat')->nullable();
+            $table->string('telephone', 20)->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
 

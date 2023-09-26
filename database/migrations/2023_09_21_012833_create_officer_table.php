@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('officer', function (Blueprint $table) {
-            $table->increments('id_officer');
-            $table->string('name');
-            $table->text('address');
-            $table->string('phone', 20);
+        Schema::create('petugas', function (Blueprint $table) {
+            $table->increments('id_petugas');
+            $table->string('nama');
+            $table->text('alamat');
+            $table->string('telephone', 20);
             $table->unsignedInteger('id_user');
             $table->timestamps();
 

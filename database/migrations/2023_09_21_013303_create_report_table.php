@@ -11,20 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report', function (Blueprint $table) {
-            $table->increments('id_report');
-            $table->longText('report_content');
-            $table->date('report_date');
+        Schema::create('laporan', function (Blueprint $table) {
+            $table->increments('id_laporan');
+            $table->longText('isi_laporan');
+            $table->date('tanggal_lapor');
             $table->string('status', 30);
-            $table->string('document');
-            $table->unsignedInteger('id_reporter');
-            $table->unsignedInteger('id_officer')->nullable();
+            $table->string('dokumen');
+            $table->unsignedInteger('id_pelapor');
+            $table->unsignedInteger('id_petugas')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign("id_reporter")->references("id_user")->on("user")
+            $table->foreign("id_pelapor")->references("id_user")->on("user")
             ->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign("id_officer")->references("id_user")->on("user")
+            $table->foreign("id_petugas")->references("id_user")->on("user")
             ->onDelete("cascade")->onUpdate("cascade");
         });
     }
