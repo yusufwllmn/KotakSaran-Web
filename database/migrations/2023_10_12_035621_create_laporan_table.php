@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id_laporan');
             $table->longText('isi_laporan');
             $table->date('tanggal_lapor');
-            $table->string('status', 30);
+            $table->unsignedInteger('id_status');
             $table->string('dokumen');
             $table->unsignedInteger('id_pelapor');
             $table->unsignedInteger('id_petugas')->nullable();
@@ -26,6 +26,8 @@ return new class extends Migration
             ->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("id_petugas")->references("id_user")->on("user")
             ->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign("id_status")->references("id_status")->on("status")
+            ->onDelete("cascade")->onUpdate("cascade");
         });
     }
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report');
+        Schema::dropIfExists('laporan');
     }
 };
