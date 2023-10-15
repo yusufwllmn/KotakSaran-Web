@@ -6,7 +6,7 @@ import React from "react";
 import NavbarInside from "@/Components/NavbarInside";
 
 
-export default function LandingPage() {
+export default function AdminPage() {
     return(
         <>
         <NavbarInside />

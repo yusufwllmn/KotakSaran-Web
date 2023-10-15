@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react"
+import React from "react"
 
 const Footer = () => {
     return(
@@ -16,8 +18,10 @@ const Footer = () => {
                 </div>
             </nav> 
             <aside>
-                <p>Copyright © 2023 - All right reserved by ACME Industries Ltd</p>
+                <p>Copyright © 2023 - All right reserved by Daffa & Yusuf RPL48.STMNPBDG</p>
             </aside>
         </footer>
     )
 }
+
+export default Footer
