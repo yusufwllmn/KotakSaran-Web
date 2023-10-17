@@ -10,7 +10,7 @@ import ContentSiswa from "@/Components/ContentSiswa";
 export default function LandingPage() {
     return(
         <>
-        <NavbarInside />
+        <Navbar />
         <ContentLanding />
         <Footer />
         </>
