@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('pelapor', function (Blueprint $table) {
             $table->increments('id_pelapor');
-            $table->string('id_identitas', 20);
-            $table->string('nama');
-            $table->unsignedInteger('id_kategori');
+            $table->string('id_identitas', 20)->nullable();
+            $table->string('nama')->nullable();
+            $table->unsignedInteger('id_kategori')->nullable();
             $table->text('alamat')->nullable();
             $table->string('telephone', 20)->nullable();
-            $table->string('foto')->nullable();
+            $table->string('avatar')->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
 

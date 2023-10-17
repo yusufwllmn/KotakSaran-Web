@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('petugas', function (Blueprint $table) {
             $table->increments('id_petugas');
-            $table->string('nama');
-            $table->text('alamat');
-            $table->string('telephone', 20);
+            $table->string('nama')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('telephone', 20)->nullable();
+            $table->string('avatar')->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
 
