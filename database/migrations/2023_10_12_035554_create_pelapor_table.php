@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('id_kategori');
             $table->text('alamat')->nullable();
             $table->string('telephone', 20)->nullable();
+            $table->string('foto')->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
 

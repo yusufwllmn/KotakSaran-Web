@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('laporan', function (Blueprint $table) {
             $table->increments('id_laporan');
+            $table->string('subjek_laporan');
             $table->longText('isi_laporan');
             $table->date('tanggal_lapor');
             $table->unsignedInteger('id_status');
