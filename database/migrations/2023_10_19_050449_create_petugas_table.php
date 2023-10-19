@@ -16,11 +16,14 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->text('alamat')->nullable();
             $table->string('telephone', 20)->nullable();
+            $table->unsignedInteger('id_bagian')->nullable();
             $table->string('avatar')->nullable();
             $table->unsignedInteger('id_user');
             $table->timestamps();
 
             $table->foreign("id_user")->references("id_user")->on("user")
+            ->onDelete("cascade")->onUpdate("cascade");
+            $table->foreign("id_bagian")->references("id_bagian")->on("bagian")
             ->onDelete("cascade")->onUpdate("cascade");
         });
     }

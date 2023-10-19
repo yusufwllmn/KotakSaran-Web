@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,6 +16,18 @@ return new class extends Migration
             $table->increments('id_status');
             $table->string('status');
         });
+
+        DB::table('status')->insert([
+            [
+                'status'    => 'dalam antrian'
+            ],
+            [
+                'status'    => 'diterima'
+            ],
+            [
+                'status'    => 'ditolak'
+            ]
+        ]);
     }
 
     /**
