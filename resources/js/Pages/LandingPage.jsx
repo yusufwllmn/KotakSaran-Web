@@ -5,13 +5,14 @@ import { Link } from "@inertiajs/react";
 import React from "react";
 import NavbarInside from "@/Components/NavbarInside";
 import ContentSiswa from "@/Components/ContentSiswa";
+import SignupPage from "@/Components/SignupPage";
 
 
 export default function LandingPage() {
     return(
         <>
-        <Navbar />
-        <ContentLanding />
+        <NavbarInside />
+        <ContentSiswa />
         <Footer />
         </>
     )
