@@ -25,7 +25,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/login" as="button">
+                        <Link href="/register" as="button">
                             <div className="w-7 rounded-full">
                             <img src="/images/register.png" />
                             </div>

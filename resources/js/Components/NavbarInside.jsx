@@ -3,9 +3,12 @@ import React from "react"
 
 const NavbarInside = () => {
     const widthProfile = '211px'
+    const zindex = {
+        zindex: 999
+    }
 
     return (
-        <div className="navbar bg-[#343A40]">
+        <div style={{ zIndex : zindex }} className="navbar bg-[#343A40] z-50">
             <div className="drawer">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
@@ -19,12 +22,12 @@ const NavbarInside = () => {
                         </div>
                     </label>
                 </div> 
-                <div className="drawer-side">
+                <div className="drawer-side z-50">
                     <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li>
-                        <Link href="/#" as="button">
+                        <Link href="/dashboard" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/home.png" />
                             </div>
@@ -32,7 +35,7 @@ const NavbarInside = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/#" as="button">
+                        <Link href="/lapor" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/laporan.png" />
                             </div>
@@ -40,7 +43,7 @@ const NavbarInside = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/#" as="button">
+                        <Link href="/siswa" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/siswa.png" />
                             </div>
@@ -80,7 +83,7 @@ const NavbarInside = () => {
                                 <p className="normal-case text-l text-white">Welcome Username</p>
                             </div>
                         </summary>
-                        <ul style={{ width: widthProfile }} className="w-full rounded-none p-1 bg-base-100 ">
+                        <ul style={{ width: widthProfile }} className="w-full rounded-none p-1 bg-base-100 z-50 ">
                             <li>
                                 <Link href="/login" as="button">
                                     <div className="w-5 rounded-full ">

@@ -1,6 +1,9 @@
+import React from 'react'
+import { Link } from "react-router-dom";
+
 const ContentSiswa = () => {
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto z-0">
             <button className="btn btn-info rounded-none btn-md text-white flex justify-end" onClick={()=>document.getElementById('my_modal_4').showModal()}>
                 <div className="w-4 ">
                     <img src="/images/add.png" />
@@ -19,41 +22,34 @@ const ContentSiswa = () => {
                     <label className="label bg-gray">
                         <span className="label-text text-lg text-gray">Tujuan Laporan :</span>
                     </label>
-                    <div className="flex-none bg-gray">
-                        <ul className="menu menu-horizontal px-1 w-24 bg-gray rounded-none w-11/12 z-20 shadow-2xl">
-                        <li className="bg">
-                            <details>
-                            <summary>
-                                Jurusan
-                            </summary>
-                            <ul className="bg-white rounded-none hover:rounded-none gap-x-16 grid md:grid-cols-2 lg:grid-cols-4">
-                                <div>
-                                <li><a>MEKA</a></li>
-                                <li><a>TEI</a></li>
-                                <li><a>TOI</a></li>
-                                <li><a>TEK</a></li>
-                                <li><a>IOP</a></li>
-                                </div>
-                                <div>
-                                <li><a>TPTUP</a></li>
-                                <li><a>RPL</a></li>
-                                <li><a>SIJA</a></li>
-                                <li><a>PSPT</a></li>
-                                </div>
-                            </ul>
-                            </details>
-                        </li>
-                        </ul>
-                    </div>
+                    <select className="select select-bordered border bordered-black border-solid bg-white w-full max-w-xs">
+                        <option disabled selected>Pilih Tujuan Laporan</option>
+                        <option>RPL</option>
+                        <option>SIJA</option>
+                        <option>PSPT</option>
+                        <option>TEI</option>
+                        <option>TEK</option>
+                        <option>TOI</option>
+                        <option>TPTU</option>
+                        <option>IOP</option>
+                        <option>MEKA</option>
+                        <option>Sarana Prasarana</option>
+                        <option>Kurikulum</option>
+                        <option>OSIS & MPK</option>
+                    </select>
+                    <label className="label">
+                        <span className="label-text text-lg text-grey">Dokumentasi Laporan :</span>
+                    </label>
+                    <input type="file" className="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
                 <div className="modal-action">
                 <form method="dialog">
                     {/* if there is a button, it will close the modal */}
-                    <button className="btn">Close</button>
+                    <button className="btn btn-info text-white">Submit</button>
                 </form>
                 </div>
             </div>
             </dialog>
-            <table className="table table-xs bg-white rounded-none" >
+            <table className="table table-xs bg-white rounded-none z-0" >
                 <thead>
                 <tr>
                     <th></th> 

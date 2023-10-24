@@ -1,5 +1,4 @@
 import ContentLanding from "@/Components/ContentLanding";
-import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import { Link } from "@inertiajs/react";
 import React from "react";
@@ -10,7 +9,7 @@ export default function AdminPage() {
     return(
         <>
         <NavbarInside />
-        <ContentLanding />
+        <ContentLanding/>
         <Footer />
         </>
     )

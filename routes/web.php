@@ -34,8 +34,16 @@ Route::get('/Welcome', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return Inertia::render('AdminPage');
+})->middleware(['auth', 'verified'])->name('adminpage');
+
+Route::get('/siswa', function () {
+    return Inertia::render('AdminSiswa');
+})->middleware(['auth', 'verified'])->name('siswa');
+
+Route::get('/lapor', function () {
+    return Inertia::render('AdminLapor');
+})->middleware(['auth', 'verified'])->name('siswa');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
