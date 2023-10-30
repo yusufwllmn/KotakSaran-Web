@@ -18,20 +18,13 @@ use Inertia\Inertia;
 */
 Route::get('/', function () {
     return Inertia::render('LandingPage', [
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'title' => 'E-Kosan',
+        'description' => 'Asikasik'
     ]);
 });
 
+Route::get('/laporan', [LaporController::class, 'index']);
 
-Route::get('/Welcome', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
 
 Route::get('/dashboard', function () {
     return Inertia::render('AdminPage');
@@ -43,7 +36,7 @@ Route::get('/siswa', function () {
 
 Route::get('/lapor', function () {
     return Inertia::render('AdminLapor');
-})->middleware(['auth', 'verified'])->name('siswa');
+})->middleware(['auth', 'verified'])->name('siswa'); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

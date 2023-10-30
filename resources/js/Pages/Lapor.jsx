@@ -5,7 +5,7 @@ import NavbarInside from "@/Components/NavbarInside";
 import ContentSiswa from "@/Components/ContentSiswa";
 
 
-export default function AdminSiswa() {
+export default function Lapor() {
     return(
         <>
         <NavbarInside />
