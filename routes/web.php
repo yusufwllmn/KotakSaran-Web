@@ -1,6 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\PelaporController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PetugaslaporanController;
+use App\Http\Controllers\PetugasprofileController;
+use App\Http\Controllers\AdminlaporanController;
+use App\Http\Controllers\AdminpelaporController;
+use App\Http\Controllers\AdminpetugasController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
