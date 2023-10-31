@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/laporan', [ApiController::class, 'laporanIndex'])->name('laporan.index');
+Route::post('/laporan', [ApiController::class, 'laporanStore'])->name('laporan.store');
+Route::get('/laporan/{id_laporan}', [ApiController::class, 'laporanShow'])->name('laporan.show');
+
+Route::get('/profile/{id_user}', [ApiController::class, 'profileShow'])->name('profile.show');
+Route::put('/profile/{id_user}', [ApiController::class. 'profileUpdate'])->name('profile.update');
 

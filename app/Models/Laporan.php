@@ -14,12 +14,12 @@ class Laporan extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'id_user');
+        return $this->belongsTo('App\Models\User', 'id_pelapor');
     }
 
     public function bagian()
     {
-        return $this->belongsTo('App\Models\Bagian', 'id_bagian');
+        return $this->belongsTo('App\Models\Bagian', 'subjek_laporan');
     }
 
     public function status()

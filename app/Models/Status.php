@@ -10,6 +10,8 @@ class Status extends Model
     use HasFactory;
     protected $table        = "status";
     protected $primaryKey   = "id_status";
-    protected $fillable     = "status";
-    
+    protected $fillable     = [
+        'status'
+    ];
+
 }
