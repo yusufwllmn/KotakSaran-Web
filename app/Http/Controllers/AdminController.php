@@ -12,7 +12,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('AdminPage');
     }
 
     /**
@@ -20,7 +20,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
