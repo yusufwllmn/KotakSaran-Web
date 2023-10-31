@@ -3,8 +3,15 @@ import { Link } from "react-router-dom";
 
 const ContentSiswa = () => {
     return (
-        <div className="overflow-x-auto z-0">
-            <button className="btn btn-info rounded-none btn-md text-white flex justify-end" onClick={()=>document.getElementById('my_modal_4').showModal()}>
+        <div className="overflow-x-auto z-0 bg-white">
+            <div className="hero h-20 bg-white">
+                <div className="hero-content text-center">
+                    <div className="max-w-md">
+                    <h1 className="text-4xl font-bold text-black">Data Laporan</h1>
+                    </div>
+                </div>
+            </div>
+            <button className="btn btn-info rounded-none btn-md text-white flex justify-end mb-2 ml-auto" onClick={()=>document.getElementById('my_modal_4').showModal()}>
                 <div className="w-4 ">
                     <img src="/images/add.png" />
                 </div>            

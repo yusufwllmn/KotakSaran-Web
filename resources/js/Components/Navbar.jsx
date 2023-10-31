@@ -17,7 +17,7 @@ const Navbar = () => {
                 <ul tabIndex={0} className="mt-2 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100  w-52">
                     <>
                     <li>
-                        <Link href="/login" as="button">
+                        <Link href="/laporan" as="button">
                             <div className="w-6 rounded-full ">
                             <img src="/images/logout.png" />
                             </div>

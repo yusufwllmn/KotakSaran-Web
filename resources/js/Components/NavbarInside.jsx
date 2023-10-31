@@ -85,7 +85,7 @@ const NavbarInside = () => {
                         </summary>
                         <ul style={{ width: widthProfile }} className="w-full rounded-none p-1 bg-base-100 z-50 ">
                             <li>
-                                <Link href="/login" as="button">
+                                <Link href="/#" as="button">
                                     <div className="w-5 rounded-full ">
                                     <img src="/images/settings.png" />
                                     </div>
@@ -93,7 +93,7 @@ const NavbarInside = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/login" as="button">
+                                <Link href="/" as="button">
                                     <div className="w-5 rounded-full transform scale-x-[-1]">
                                     <img src="/images/logout.png" />
                                     </div>
