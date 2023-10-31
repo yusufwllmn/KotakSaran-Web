@@ -16,7 +16,7 @@ return new class extends Migration
             CREATE TRIGGER user_filter AFTER INSERT ON user FOR EACH ROW
             BEGIN
                 DECLARE peran VARCHAR(20);
-                SELECT roles INTO peran FROM user
+                SELECT role INTO peran FROM user
                 WHERE user.id_user = NEW.id_user;
 
                 IF peran = "pelapor" THEN

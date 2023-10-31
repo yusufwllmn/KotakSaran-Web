@@ -117,7 +117,9 @@ require __DIR__.'/auth.php';
         Route::delete('/admin/pelapor/{id_user}', [AdminpelaporController::class, 'pelaporHapus'])->name('adminpelaporHapus');
 
         Route::get('/admin/petugas', [AdminpetugasController::class, 'petugasTampil'])->name('adminpetugasTampil');
+        Route::post('/admin/petugas', [AdminlaporanController::class, 'petugasTambah'])->name('adminpetugasTambah');
         Route::delete('/admin/petugas/{id_user}', [AdminpetugasController::class, 'petugasHapus'])->name('adminpetugasHapus');
+        Route::put('/admin/petugas/{id_user}', [AdminlaporanController::class, 'petugasEdit'])->name('adminpetugasEdit');
 
     });
 });
