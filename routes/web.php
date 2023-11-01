@@ -94,12 +94,12 @@ Route::get('/admin/laporan', [AdminController::class, 'store']);
 
     // });
 
-    Route::middleware(['role:Customer'])->group(function() {
+    // Route::middleware(['role:Admin'])->group(function() {
         Route::get('/admin/', [AdminController::class, 'index'])->name('adminPage');
 
         Route::get('/admin/laporan', [AdminlaporanController::class, 'index'])->name('adminlaporan.index');
         Route::post('/admin/laporan', [AdminlaporanController::class, 'store'])->name('adminlaporan.store');
-        Route::get('/admin/laporan/{id_laporan}', [AdminlaporanController::class, 'show'])->name('adminlaporan.show');
+        // Route::get('/admin/laporan/{id_laporan}', [AdminlaporanController::class, 'show'])->name('adminlaporan.show');
         Route::delete('/admin/laporan/{id_laporan}', [AdminlaporanController::class, 'destroy'])->name('adminlaporan.destroy');
         Route::put('/admin/laporan/{id_laporan}', [AdminlaporanController::class, 'update'])->name('adminlaporan.update');
 
@@ -111,7 +111,7 @@ Route::get('/admin/laporan', [AdminController::class, 'store']);
         Route::delete('/admin/petugas/{id_user}', [AdminpetugasController::class, 'destroy'])->name('adminpetugas.destroy');
         Route::put('/admin/petugas/{id_user}', [AdminlaporanController::class, 'update'])->name('adminpetugas.update');
 
-    });
+    // });
 // });
 
 
