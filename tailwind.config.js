@@ -8,6 +8,15 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.jsx',
+
+        "./resources/**/**/*.{js,blade.php}",
+        "./app/View/Components/**/**/*.php",
+        "./app/Livewire/**/**/*.php",
+        "./vendor/robsontenorio/mary/src/View/Components/**/*.php",
+
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
     ],
 
     theme: {

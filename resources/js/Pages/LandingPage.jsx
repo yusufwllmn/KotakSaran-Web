@@ -4,7 +4,7 @@ import Footer from "@/Components/Footer";
 import { Head, Link } from "@inertiajs/react";
 import React from "react";
 import NavbarInside from "@/Components/NavbarInside";
-import ContentSiswa from "@/Components/ContentSiswa";
+import ContentSiswa from "@/Components/ContentLapor";
 import SignupPage from "@/Components/SignupPage";
 
 

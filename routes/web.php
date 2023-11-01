@@ -24,81 +24,75 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return Inertia::render('LandingPage', [
-        'title' => 'E-Kosan',
-        'description' => 'Asikasik'
-    ]);
-});
 
-Route::get('/laporan', [LaporController::class, 'index']);
+Route::get('/', [AdminController::class, 'index']);
+Route::get('/admin/laporan', [AdminController::class, 'store']);
 
 
-Route::get('/dashboard', function () {
-    return Inertia::render('AdminPage');
-})->middleware(['auth', 'verified'])->name('adminpage');
+// // Route::get('/dashboard', function () {
+// //     return Inertia::render('AdminPage');
+// // })->middleware(['auth', 'verified'])->name('adminpage');
 
-Route::get('/siswa', function () {
-    return Inertia::render('AdminSiswa');
-})->middleware(['auth', 'verified'])->name('siswa');
+// Route::get('/siswa', function () {
+//     return Inertia::render('AdminSiswa');
+// })->middleware(['auth', 'verified'])->name('siswa');
 
-Route::get('/lapor', function () {
-    return Inertia::render('AdminLapor');
-})->middleware(['auth', 'verified'])->name('siswa');
+// Route::get('/lapor', function () {
+//     return Inertia::render('AdminLapor');
+// })->middleware(['auth', 'verified'])->name('siswa');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
-/*
-    Route::get('/', [LoginController::class, 'index'])->name('loginPage');
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
+    // Route::get('/', [LoginController::class, 'index'])->name('loginPage');
+    // Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-    Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
-    Route::post('/register', [LoginController::class, 'register'])->name('register');
+    // Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
+    // Route::post('/register', [LoginController::class, 'register'])->name('register');
 
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        if(Auth::user()->role == 'pelapor'){
-            return redirect('/dashboard/');
-        } else if(Auth::user()->role == 'petugas'){
-            return redirect('/petugas/');
-        } else if(Auth::user()->role == 'admin'){
-            return redirect('/admin/');
-        }else{
-            return redirect('/');
-        }
-    });
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // Route::middleware(['auth'])->group(function () {
+    // Route::get('/home', function () {
+    //     if(Auth::user()->role == 'pelapor'){
+    //         return redirect('/dashboard/');
+    //     } else if(Auth::user()->role == 'petugas'){
+    //         return redirect('/petugas/');
+    //     } else if(Auth::user()->role == 'admin'){
+    //         return redirect('/admin/');
+    //     }else{
+    //         return redirect('/');
+    //     }
+    // });
+    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::middleware(['role:pelapor'])->group(function() {
-        Route::get('/dashboard', [PelaporController::class, 'index'])->name('pelaporPage');
+    // Route::middleware(['role:pelapor'])->group(function() {
+    //     Route::get('/dashboard', [PelaporController::class, 'index'])->name('pelaporPage');
 
-        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
-        Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
-        Route::get('/laporan/{id_laporan}', [LaporanController::class, 'show'])->name('laporan.show');
+    //     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    //     Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
+    //     Route::get('/laporan/{id_laporan}', [LaporanController::class, 'show'])->name('laporan.show');
 
-        Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
-        Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
-    });
+    //     Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
+    //     Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
+    // });
 
-    Route::middleware(['role:petugas'])->group(function() {
-        Route::get('/petugas/', [PetugasController::class, 'index'])->name('petugasPage');
+    // Route::middleware(['role:petugas'])->group(function() {
+    //     Route::get('/petugas/', [PetugasController::class, 'index'])->name('petugasPage');
 
-        Route::get('/petugas/laporan', [PetugaslaporanController::class, 'index'])->name('petugaslaporan.index');
-        Route::get('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'show'])->name('petugaslaporan.show');
-        Route::put('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'update'])->name('petugaslaporan.update');
+    //     Route::get('/petugas/laporan', [PetugaslaporanController::class, 'index'])->name('petugaslaporan.index');
+    //     Route::get('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'show'])->name('petugaslaporan.show');
+    //     Route::put('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'update'])->name('petugaslaporan.update');
 
-        Route::get('/petugas/profile/{id_user}', [PetugasprofileController::class, 'show'])->name('petugasprofile.show');
-        Route::put('/petugas/profile/{id_user}', [PetugasprofileController::class, 'update'])->name('petugasprofile.update');
+    //     Route::get('/petugas/profile/{id_user}', [PetugasprofileController::class, 'show'])->name('petugasprofile.show');
+    //     Route::put('/petugas/profile/{id_user}', [PetugasprofileController::class, 'update'])->name('petugasprofile.update');
 
-    });
+    // });
 
     Route::middleware(['role:Customer'])->group(function() {
         Route::get('/admin/', [AdminController::class, 'index'])->name('adminPage');
@@ -118,6 +112,6 @@ require __DIR__.'/auth.php';
         Route::put('/admin/petugas/{id_user}', [AdminlaporanController::class, 'update'])->name('adminpetugas.update');
 
     });
-});
+// });
 
-*/
+

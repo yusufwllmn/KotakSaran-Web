@@ -27,7 +27,7 @@ const NavbarInside = () => {
                     <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li>
-                        <Link href="/dashboard" as="button">
+                        <Link href="/" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/home.png" />
                             </div>
@@ -35,7 +35,7 @@ const NavbarInside = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/lapor" as="button">
+                        <Link href="/admin/laporan" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/laporan.png" />
                             </div>
@@ -43,7 +43,7 @@ const NavbarInside = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/siswa" as="button">
+                        <Link href="/" as="button">
                             <div className="w-7 rounded-full ">
                             <img src="/images/siswa.png" />
                             </div>
