@@ -28,9 +28,6 @@ class LaporanController extends Controller
         $request->validate([
             'subjek_laporan'    => 'required',
             'isi_laporan'       => 'required',
-            'tanggal_lapor'     => 'required',
-            'id_status'         => 'required',
-            'id_pelapor'        => 'required',
         ]);
 
         $laporan->subjek_laporan    = $request->subjek_laporan;
