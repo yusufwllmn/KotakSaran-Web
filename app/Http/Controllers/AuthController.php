@@ -9,49 +9,49 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public function index()
-    {
-        return view('auth.login');
-    }
+    // public function index()
+    // {
+    //     return view('auth.login');
+    // }
 
-    public function login(Request $request)
-    {
-        $user = User::where('email', $request->input('email'))->first();
+    // public function login(Request $request)
+    // {
+    //     $user = User::where('email', $request->input('email'))->first();
 
-        if(!$user)
-            return to_route('loginPage')->with('error', 'Email atau Password tidak sesuai');
+    //     if(!$user)
+    //         return to_route('loginPage')->with('error', 'Email atau Password tidak sesuai');
 
-        if(!Hash::check($request->input('password'), $user->password))
-            return to_route('loginPage')->with('error', 'Email atau Password tidak sesuai');
+    //     if(!Hash::check($request->input('password'), $user->password))
+    //         return to_route('loginPage')->with('error', 'Email atau Password tidak sesuai');
 
-        if($user->role == 'admin') {
-            Auth::login($user);
-            return to_route('adminPage');
-        } elseif($user->role == 'petugas') {
-            Auth::login($user);
-            return to_route('petugasPage');
-        } else {
-            Auth::login($user);
-            return to_route('pelaporPage');
-        }
-    }
+    //     if($user->role == 'admin') {
+    //         Auth::login($user);
+    //         return to_route('adminPage');
+    //     } elseif($user->role == 'petugas') {
+    //         Auth::login($user);
+    //         return to_route('petugasPage');
+    //     } else {
+    //         Auth::login($user);
+    //         return to_route('pelaporPage');
+    //     }
+    // }
 
-    public function register(Request $request)
-    {
-        $user = User::create([
-            'email',
-            'password' => Hash::make($request),
-            'role' => 'pelapor'
-        ]);
+    // public function register(Request $request)
+    // {
+    //     $user = User::create([
+    //         'email',
+    //         'password' => Hash::make($request),
+    //         'role' => 'pelapor'
+    //     ]);
 
-        Auth::login($user);
-        return to_route('pelaporPage');
-    }
+    //     Auth::login($user);
+    //     return to_route('pelaporPage');
+    // }
 
-    public function logout()
-    {
-        Auth::logout();
+    // public function logout()
+    // {
+    //     Auth::logout();
 
-        return to_route('loginPage');
-    }
+    //     return to_route('loginPage');
+    // }
 }

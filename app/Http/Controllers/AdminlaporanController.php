@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Laporan;
 use App\Models\User;
+use App\Models\Bagian;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,9 +13,10 @@ class AdminlaporanController extends Controller
     public function index()
     {
         $datalaporan = Laporan::orderby('id_laporan', 'ASC')->paginate(10);
+        $databagian  = Bagian::all();
         $datauser    = User::all();
 
-        return view('admin.laporan',['laporan'=>$datalaporan, 'user'=>$datauser]);
+        return view('admin.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser]);
     }
 
     /**

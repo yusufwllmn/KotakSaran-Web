@@ -9,9 +9,10 @@ use App\Http\Controllers\PetugasprofileController;
 use App\Http\Controllers\AdminlaporanController;
 use App\Http\Controllers\AdminpelaporController;
 use App\Http\Controllers\AdminpetugasController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 /*
@@ -24,11 +25,6 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', [AdminController::class, 'index']);
-Route::get('/admin/laporan', [AdminController::class, 'store']);
-
-
 // // Route::get('/dashboard', function () {
 // //     return Inertia::render('AdminPage');
 // // })->middleware(['auth', 'verified'])->name('adminpage');
@@ -49,27 +45,27 @@ Route::get('/admin/laporan', [AdminController::class, 'store']);
 
 // require __DIR__.'/auth.php';
 
-    // Route::get('/', [LoginController::class, 'index'])->name('loginPage');
-    // Route::post('/login', [LoginController::class, 'login'])->name('login');
+    Route::get('/', [LoginController::class, 'index'])->name('loginPage');
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-    // Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
-    // Route::post('/register', [LoginController::class, 'register'])->name('register');
+    Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
+    Route::post('/register', [LoginController::class, 'register'])->name('register');
 
-    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Route::middleware(['auth'])->group(function () {
-    // Route::get('/home', function () {
-    //     if(Auth::user()->role == 'pelapor'){
-    //         return redirect('/dashboard/');
-    //     } else if(Auth::user()->role == 'petugas'){
-    //         return redirect('/petugas/');
-    //     } else if(Auth::user()->role == 'admin'){
-    //         return redirect('/admin/');
-    //     }else{
-    //         return redirect('/');
-    //     }
-    // });
-    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        if(Auth::user()->role == 'pelapor'){
+            return redirect('/dashboard/');
+        } else if(Auth::user()->role == 'petugas'){
+            return redirect('/petugas/');
+        } else if(Auth::user()->role == 'admin'){
+            return redirect('/admin/');
+        }else{
+            return redirect('/');
+        }
+    });
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Route::middleware(['role:pelapor'])->group(function() {
     //     Route::get('/dashboard', [PelaporController::class, 'index'])->name('pelaporPage');
@@ -94,8 +90,8 @@ Route::get('/admin/laporan', [AdminController::class, 'store']);
 
     // });
 
-    // Route::middleware(['role:Admin'])->group(function() {
-        Route::get('/admin/', [AdminController::class, 'index'])->name('adminPage');
+        Route::middleware(['role:Admin'])->group(function() {
+        Route::get('/admin', [AdminController::class, 'index'])->name('adminPage');
 
         Route::get('/admin/laporan', [AdminlaporanController::class, 'index'])->name('adminlaporan.index');
         Route::post('/admin/laporan', [AdminlaporanController::class, 'store'])->name('adminlaporan.store');
@@ -111,7 +107,7 @@ Route::get('/admin/laporan', [AdminController::class, 'store']);
         Route::delete('/admin/petugas/{id_user}', [AdminpetugasController::class, 'destroy'])->name('adminpetugas.destroy');
         Route::put('/admin/petugas/{id_user}', [AdminlaporanController::class, 'update'])->name('adminpetugas.update');
 
-    // });
-// });
+    });
+});
 
 
