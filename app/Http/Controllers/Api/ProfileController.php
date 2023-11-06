@@ -7,6 +7,7 @@ use App\Models\Pelapor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\CountValidator\AtMost;
 
 class ProfileController extends Controller
 {
@@ -30,7 +31,27 @@ class ProfileController extends Controller
         }
     }
 
-    public function update(){
-        
+    public function update($id_pelapor, Request $request){
+        $pelapor = Pelapor::find($request->$id_pelapor);
+
+        $request->validate([
+            'nama'  => 'required'
+        ]);
+
+        if(Auth::user()->id_user != $request->id_user){
+            return response()->json([
+                'message'   => 'Unauthorized Access'
+            ]);
+        }
+
+        $pelapor->id_identitas  = $request->id_identitas;
+        $pelapor->nama          = $request->nama;
+        $pelapor->id_kategori   = $request->id_kategori;
+        $pelapor->alamat        = $request->telephone;
+        $pelapor->id_user       = Auth::user()->id_user;
+        $pelapor->save();
+        return response()->json([
+            'message'   => 'Updated'
+        ]);
     }
 }
