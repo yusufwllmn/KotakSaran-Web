@@ -78,25 +78,29 @@
                                     <img src="/images/profilelogo.png" />
                                 </div>
                                 <div>
-                                    <p class="normal-case text-l text-white">Welcome Username</p>
+                                    <p class="normal-case text-l text-white">Welcome {{ Auth::user()->email }}</p>
                                 </div>
                             </summary>
                             <ul class="w-full rounded-none p-1 bg-base-100 z-50 ">
                                 <li>
-                                    <Link href="/#" as="button">
-                                    <div class="w-5 rounded-full ">
-                                        <img src="/images/settings.png" />
-                                    </div>
-                                    Edit Profile
-                                    </Link>
+                                    <a>
+                                        <div class="w-5 rounded-full ">
+                                            <img src="/images/settings.png" />
+                                        </div>
+                                        Settings
+                                    </a>
                                 </li>
                                 <li>
-                                    <Link href="/" as="button">
-                                    <div class="w-5 rounded-full transform scale-x-[-1]">
-                                        <img src="/images/logout.png" />
-                                    </div>
-                                    Logout
-                                    </Link>
+                                    <a>
+                                        
+                                        <div class="w-5 rounded-full ">
+                                            <img src="/images/logout.png" />
+                                        </div>
+                                        <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                            <button type="submit" class="bg-[#1D232A] w-full text-left hover:bg-[#1D232A]" onclick="return confirm('Apakah anda ingin Logout?')">Log out</button>
+                                        </form>
+                                    </a>
                                 </li>
                             </ul>
                         </details>

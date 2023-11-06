@@ -90,7 +90,7 @@ use Illuminate\Support\Facades\Route;
 
     // });
 
-        Route::middleware(['role:Admin'])->group(function() {
+        Route::middleware(['role:admin'])->group(function() {
         Route::get('/admin', [AdminController::class, 'index'])->name('adminPage');
 
         Route::get('/admin/laporan', [AdminlaporanController::class, 'index'])->name('adminlaporan.index');

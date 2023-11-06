@@ -23,12 +23,15 @@ class LoginController extends Controller
         if(!Hash::check($request->input('password'), $user->password))
             return to_route('loginPage')->with('error', 'Email atau Password tidak sesuai');
 
-        if($user->role == 'Admin') {
+        if($user->role == 'admin') {
             Auth::login($user);
             return to_route('adminPage');
-        } else {
+        } else if($user->role == 'petugas'){
             Auth::login($user);
-            return to_route('customerPage');
+            return to_route('petugasPage');
+        } else{
+            Auth::login($user);
+            return to_route('pelaporPage');
         }
     }
 
