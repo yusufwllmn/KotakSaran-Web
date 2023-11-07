@@ -31,7 +31,7 @@
                         <label class="label bg-gray">
                             <span class="label-text text-lg text-gray">Tanggal :</span>
                         </label>
-                        <input type="date" id="tanggal_laporan" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}">
+                        <input type="date" id="tanggal_laporan" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}" @readonly(true)>
                         <label class="label bg-gray">
                             <span class="label-text text-lg text-gray">Tujuan Laporan :</span>
                         </label>
@@ -48,11 +48,7 @@
                             <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
                         </label>
                         <input type="file" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
-                    <div class="modal-action">
-                    <form method="dialog">
-                        <button class="btn btn-info text-white">Submit</button>
-                    </form>
-                    </div>
+                        <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Submit</button>
                 </div>
             </form>
             </dialog>

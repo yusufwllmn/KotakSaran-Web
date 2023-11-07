@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use App\Models\User;
 use App\Models\Bagian;
+use App\Models\Status;
 use App\Models\Pelapor;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -19,8 +22,9 @@ class LaporanController extends Controller
         $databagian  = Bagian::all();
         $datauser    = User::all();
         $datapelapor = Pelapor::all();
+        $datastatus  = Status::all();
 
-        return view('pelapor.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser, 'pelapor'=>$datapelapor]);
+        return view('pelapor.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser, 'pelapor'=>$datapelapor, 'status'=>$datastatus]);
     }
 
     /**
@@ -36,7 +40,36 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'telepon' => 'required',
+            'tanggalPesan' => 'required',
+            'tanggalSewa' => 'required',
+        ]);
+
+        $laporan = Laporan::create([
+            'id_user' => Auth::user()->id_user,
+            'nama' => $request->nama,
+            'no_telp' => $request->telepon,
+            'tgl_pesan' => $request->tanggalPesan,
+            'tgl_sewa' => $request->tanggalSewa,
+            'status' => 'Diproses'
+        ]);
+
+        $file = request('attachment');
+        if ($file) {
+            $dir = 'uploads';
+            $fileName = time() . '-' . str_random(8) . '.' .
+                        $file->extension();
+            $file->move($dir, $fileName);
+            $filepath = $dir . '/' . $fileName;
+            $laporan->attachment = $filepath;
+            $laporan->save();
+    }
+    session()->flash('successMessage', 'Data saved');
+    return redirect()->back();
+
+        return redirect('/customer/aula');
     }
 
     /**

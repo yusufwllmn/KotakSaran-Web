@@ -23,42 +23,36 @@
                 <div class="modal-box w-full h-5/6 max-w-7xl bg-white z-0">
                     <h3 class="font-bold text-[#6C757D] text-center text-2xl">Laporkan</h3>
                         <div class="form-control">
-                        <label class="label">
-                            <span class="label-text text-lg text-grey">Isi Laporan :</span>
-                        </label>
-                        
-                            <input type="text" placeholder="You can't touch this" class="input input-bordered w-full max-w-xs" disabled>
-                        
-                        <label class="label">
-                            <span class="label-text text-lg text-grey">Isi Laporan :</span>
-                        </label>
-                        <textarea id="" class="textarea textarea-bordered bordered-black border border-solid h-48 bg-white text-black" placeholder="Masukan Disini..."></textarea>
+                            @foreach($laporan as $l)
+                                <input type="hidden" class="form-control" id="id_user" name="id_user" value="{{ $l->user->id_user}}" @readonly(true)>
+                            @endforeach
+                            @foreach($status as $st)
+                                <input type="hidden" class="form-control" id="id_status" name="id_status" value="{{ $st->id_status='1' }}" @readonly(true)>
+                            @endforeach
+                            <label class="label">
+                                <span class="label-text text-lg text-grey">Isi Laporan :</span>
+                            </label>
+                            <textarea id="isi_laporan" name="isilaporan" class="textarea textarea-bordered bordered-black border border-solid h-48 bg-white text-black" placeholder="Masukan Disini..."></textarea>
+                            </div>
+                            <label class="label bg-gray">
+                                <span class="label-text text-lg text-gray">Tanggal :</span>
+                            </label>
+                            <input type="date" id="tanggal_lapor" name="tanggallapor" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}" @readonly(true)>
+                            <label class="label bg-gray">
+                                <span class="label-text text-lg text-gray">Tujuan Laporan :</span>
+                            </label>
+                                <select class="select select-bordered border bordered-black border-solid bg-white w-full max-w-xs" id="subjek_laporan" name="subjek">
+                                    <option disabled selected>Pilih Tujuan Laporan</option>
+                                    @foreach($subjek as $s)
+                                        <option value="{{ $s->id_bagian }}">{{ $s->bagian }}</option>
+                                    @endforeach
+                                </select>
+                            <label class="label">
+                                <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
+                            </label>
+                            <input type="file" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
+                            <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Submit</button>
                         </div>
-                        <label class="label bg-gray">
-                            <span class="label-text text-lg text-gray">Tanggal :</span>
-                        </label>
-                        <input type="date" id="tanggal_laporan" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}">
-                        <label class="label bg-gray">
-                            <span class="label-text text-lg text-gray">Tujuan Laporan :</span>
-                        </label>
-                    
-                            <select class="select select-bordered border bordered-black border-solid bg-white w-full max-w-xs" id="subjek_laporan" name="subjek">
-                                <option disabled selected>Pilih Tujuan Laporan</option>
-                                @foreach($subjek as $s)
-                                    <option value="{{ $s->id_bagian }}">{{ $s->bagian }}</option>
-                                @endforeach
-                            </select>
-
-                        
-                        <label class="label">
-                            <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
-                        </label>
-                        <input type="file" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
-                    <div class="modal-action">
-                    <form method="dialog">
-                        <button class="btn btn-info text-white">Submit</button>
-                    </form>
-                    </div>
                 </div>
             </form>
             </dialog>
