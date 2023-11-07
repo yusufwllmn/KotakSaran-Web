@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Models\Bagian;
 use App\Models\Status;
 use App\Models\Pelapor;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -59,7 +59,7 @@ class LaporanController extends Controller
         $file = request('attachment');
         if ($file) {
             $dir = 'uploads';
-            $fileName = time() . '-' . str_random(8) . '.' .
+            $fileName = time() . '-' . Str::random(8) . '.' .
                         $file->extension();
             $file->move($dir, $fileName);
             $filepath = $dir . '/' . $fileName;
