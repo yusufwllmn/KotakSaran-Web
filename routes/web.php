@@ -67,16 +67,16 @@ use Illuminate\Support\Facades\Route;
     });
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Route::middleware(['role:pelapor'])->group(function() {
-    //     Route::get('/dashboard', [PelaporController::class, 'index'])->name('pelaporPage');
+    Route::middleware(['role:pelapor'])->group(function() {
+        Route::get('/dashboard', [PelaporController::class, 'index'])->name('pelaporPage');
 
-    //     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
-    //     Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
-    //     Route::get('/laporan/{id_laporan}', [LaporanController::class, 'show'])->name('laporan.show');
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+        Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
+        Route::get('/laporan/{id_laporan}', [LaporanController::class, 'show'])->name('laporan.show');
 
-    //     Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
-    //     Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
-    // });
+        Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
+        Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
+    });
 
     // Route::middleware(['role:petugas'])->group(function() {
     //     Route::get('/petugas/', [PetugasController::class, 'index'])->name('petugasPage');

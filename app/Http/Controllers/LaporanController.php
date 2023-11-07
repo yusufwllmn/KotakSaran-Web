@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laporan;
+use App\Models\User;
+use App\Models\Bagian;
+use App\Models\Pelapor;
 use Illuminate\Http\Request;
 
 class LaporanController extends Controller
@@ -12,7 +15,12 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        $datalaporan = Laporan::orderby('id_laporan', 'ASC')->paginate(15);
+        $databagian  = Bagian::all();
+        $datauser    = User::all();
+        $datapelapor = Pelapor::all();
+
+        return view('pelapor.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser, 'pelapor'=>$datapelapor]);
     }
 
     /**
