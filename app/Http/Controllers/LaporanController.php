@@ -10,6 +10,7 @@ use App\Models\Pelapor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class LaporanController extends Controller
 {
@@ -59,17 +60,14 @@ class LaporanController extends Controller
         $file = request('attachment');
         if ($file) {
             $dir = 'uploads';
-            $fileName = time() . '-' . str_random(8) . '.' .
+            $fileName = time() . '-' . Str::random(8) . '.' .
                         $file->extension();
             $file->move($dir, $fileName);
             $filepath = $dir . '/' . $fileName;
             $laporan->attachment = $filepath;
             $laporan->save();
     }
-    session()->flash('successMessage', 'Data saved');
-    return redirect()->back();
-
-        return redirect('/customer/aula');
+        return redirect('/laporan');
     }
 
     /**
