@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Models\Bagian;
 use App\Models\Status;
 use App\Models\Pelapor;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

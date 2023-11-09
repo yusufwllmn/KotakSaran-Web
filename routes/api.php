@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiController;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,18 +24,18 @@ Route::get('/', function ()  {
     ],401);
 })->name('login');
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', ['App\Http\Controllers\Api\AuthController', 'login']);
+Route::post('/register', ['App\Http\Controllers\Api\AuthController', 'register']);
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/riwayat', [RiwayatController::class, 'index']);
-    Route::get('/riwayat/{id_laporan}', [RiwayatController::class, 'show']);
+// Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/riwayat', ['App\Http\Controllers\Api\RiwayatController', 'index']);
+    Route::get('/riwayat/{id_laporan}', ['App\Http\Controllers\Api\RiwayatController', 'show']);
 
-    Route::get('/laporan', [LaporanController::class, 'index']);
-    Route::post('/laporan', [LaporanController::class, 'store']);
+    Route::get('/laporan', ['App\Http\Controllers\Api\LaporanController', 'index']);
+    Route::post('/laporan', ['App\Http\Controllers\Api\LaporanController', 'store']);
 
-    Route::get('/profile', [ProfileController::class, 'index']);
-    Route::put('/profile/{id_user}', [ProfileController::class, 'update']);
+    Route::get('/profile', ['App\Http\Controllers\Api\ProfileController', 'index']);
+    Route::put('/profile/{id_user}', ['App\Http\Controllers\Api\ProfileController', 'update']);
 
-    Route::get('/logout', [AuthController::class, 'logout']);
-});
+    Route::get('/logout', ['App\Http\Controllers\Api\AuthController', 'logout']);
+// });
