@@ -32,13 +32,17 @@ class ProfileController extends Controller
     }
 
     public function update($id_pelapor, Request $request){
-        $pelapor = Pelapor::find($request->$id_pelapor);
+        $pelapor = Pelapor::find($id_pelapor);
 
-        $request->validate([
-            'nama'  => 'required'
+        $this->validate($request,[
+            'id_identitas'  => 'required',
+            'nama'          => 'required',
+            'id_kategori'   => 'required',
+            'alamat'        => 'required',
+            'telephone'     => 'required',
         ]);
 
-        if(Auth::user()->id_user != $request->id_user){
+        if(!Auth::check()){
             return response()->json([
                 'message'   => 'Unauthorized Access'
             ]);
@@ -47,8 +51,8 @@ class ProfileController extends Controller
         $pelapor->id_identitas  = $request->id_identitas;
         $pelapor->nama          = $request->nama;
         $pelapor->id_kategori   = $request->id_kategori;
-        $pelapor->alamat        = $request->telephone;
-        $pelapor->id_user       = Auth::user()->id_user;
+        $pelapor->alamat        = $request->alamat;
+        $pelapor->telephone     = $request->telephone;
         $pelapor->save();
         return response()->json([
             'message'   => 'Updated'

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('isi_laporan');
             $table->date('tanggal_lapor');
             $table->unsignedInteger('id_status');
-            $table->string('dokumen');
+            $table->string('dokumen')->nullable();
             $table->unsignedInteger('id_pelapor');
             $table->timestamps();
             $table->softDeletes();

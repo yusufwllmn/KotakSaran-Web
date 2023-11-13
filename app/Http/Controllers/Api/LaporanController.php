@@ -35,13 +35,12 @@ class LaporanController extends Controller
         $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
         $laporan->id_status         = 1;
         if($request->dokumen != ''){
-            $dokumen = time().'jpg';
-            file_put_contents('storage/images/'.$dokumen,base64_decode($request->dokumen));
+            $dokumen = time().'.jpg';
+            file_put_contents('public/dokumen/'.$dokumen,base64_decode($request->dokumen));
         }
         $laporan->id_pelapor        = Auth::user()->id_user;
 
         $laporan->save();
-        $laporan->user;
         return response()->json([
             'message'   => 'Laporan Delivered',
             'laporan'   => $laporan
