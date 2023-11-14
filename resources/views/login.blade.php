@@ -20,7 +20,7 @@
                             ACCOUNT LOGIN
                         </h1>
 
-                        <form class="space-y-4 md:space-y-6" action="{{ route('login') }}" method="post">
+                        <form class="space-y-4 md:space-y-6" action="{{ route('loginAction') }}" method="post">
                             @csrf
                             <div>
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-400 dark:text-gray">Masukan Email :</label>

@@ -46,7 +46,7 @@ use Illuminate\Support\Facades\Route;
 // require __DIR__.'/auth.php';
 
     Route::get('/', [LoginController::class, 'index'])->name('loginPage');
-    Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/login', [LoginController::class, 'login'])->name('loginAction');
 
     Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
     Route::post('/register', [LoginController::class, 'register'])->name('register');

@@ -28,11 +28,11 @@
                                         <input type="password" name="password" placeholder="Password" required="" class="bg-white border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 dark:placeholder-gray-600 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                                     </div>
                                     <label for="password" class="block mb-2 text-sm font-medium text-gray-400 dark:text-gray">Sign Up Sebagai :</label>
-                                    <select class="text-black select select-bordered border bordered-black border-solid bg-white w-full max-w-xs" id="subjek_laporan" name="subjek">
+                                    <!-- <select class="text-black select select-bordered border bordered-black border-solid bg-white w-full max-w-xs" id="subjek_laporan" name="subjek">
                                         @foreach($kategori as $k)
                                             <option value="{{ $k->id_kategori }}">{{ $k->kategori }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> -->
                                     <button type="submit" class="w-full text-white btn btn-accent ">Sign Up</button>
                                 </form>
                             </div>

@@ -18,13 +18,13 @@
             </button>
             
             <dialog id="my_modal_4" class="modal">
-            <form action="{{ Route('adminlaporan.store')}}" method="post" class="w-full h-full max-w-7xl mt-32">
+            <form action="{{ Route('adminlaporan.store')}}" method="post" class="w-full h-full max-w-7xl mt-32" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-box w-full h-5/6 max-w-7xl bg-white z-0">
                     <h3 class="font-bold text-[#6C757D] text-center text-2xl">Laporkan</h3>
                         <div class="form-control">
                             @foreach($laporan as $l)
-                                <input type="hidden" class="form-control" id="id_pelapor" name="id_pelapor" value="{{ $l->user->id_user->pelapor->id_pelapor}}" @readonly(true)>
+                                <input type="hidden" class="form-control" id="id_pelapor" name="id_pelapor" value="{{ $l->user->id_user->id_pelapor}}" @readonly(true)>
                             @endforeach
                             @foreach($status as $st)
                                 <input type="hidden" class="form-control" id="id_status" name="id_status" value="{{ $st->id_status='1' }}" @readonly(true)>
