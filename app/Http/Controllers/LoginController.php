@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,20 +37,21 @@ class LoginController extends Controller
     }
 
     public function registerPage() {
-        return view('register');
+        $datakategori  = Kategori::all();
+
+        return view('register', ['kategori'=>$datakategori]);
     }
 
     public function register(Request $request)
     {
         $user = User::create([
-            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'Customer'
+            'role' => 'pelapor'
         ]);
 
         Auth::login($user);
-        return to_route('customerPage');
+        return to_route('pelaporPage');
     }
 
     public function logout()

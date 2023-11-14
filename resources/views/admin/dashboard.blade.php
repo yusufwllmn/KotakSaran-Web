@@ -92,7 +92,6 @@
                                 </li>
                                 <li>
                                     <a>
-                                        
                                         <div class="w-5 rounded-full ">
                                             <img src="/images/logout.png" />
                                         </div>

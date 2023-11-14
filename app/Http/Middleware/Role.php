@@ -14,7 +14,7 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$roles): Response
+    public function handle(Request $request, Closure $next, ...$role): Response
     {
         // Check if the user is authenticated
         if (!Auth::check()) {
@@ -25,7 +25,7 @@ class Role
         $user = Auth::user();
 
         // Check if the user has any of the specified roles
-        foreach ($roles as $role) {
+        foreach ($role as $role) {
             if ($user->role == $role) {
                 return $next($request);
             }

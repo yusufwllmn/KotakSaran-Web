@@ -10,7 +10,6 @@ use App\Models\Pelapor;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class LaporanController extends Controller
 {
@@ -42,32 +41,41 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
-            'telepon' => 'required',
-            'tanggalPesan' => 'required',
-            'tanggalSewa' => 'required',
+            'id_laporan' => 'required',
+            'subjek_laporan' => 'required',
+            'isi_laporan' => 'required',
+            'tanggal_lapor' => 'required',
+            'id_status' => 'required',
+            'dokumen' => 'required',
+            'id_pelapor' => 'required',
         ]);
 
-        $laporan = Laporan::create([
-            'id_user' => Auth::user()->id_user,
-            'nama' => $request->nama,
-            'no_telp' => $request->telepon,
-            'tgl_pesan' => $request->tanggalPesan,
-            'tgl_sewa' => $request->tanggalSewa,
-            'status' => 'Diproses'
+        Laporan::create([
+            'id_laporan' => $request->id_laporan,
+            'subjek_laporan' => $request->subjek_laporan,
+            'isi_laporan' => $request->isi_laporan,
+            'tanggal_lapor' => $request->tanggal_lapor,
+            'id_status' => $request->id_status,
+            'id_pelapor' => $request->id_pelapor
         ]);
 
-        $file = request('attachment');
-        if ($file) {
-            $dir = 'uploads';
-            $fileName = time() . '-' . Str::random(8) . '.' .
-                        $file->extension();
-            $file->move($dir, $fileName);
-            $filepath = $dir . '/' . $fileName;
-            $laporan->attachment = $filepath;
-            $laporan->save();
-    }
-        return redirect('/laporan');
+        //mengambil data file yang diupload
+        $file           = $request->file('dokumen');
+        //mengambil nama file
+        $nama_file      = $file->getClientOriginalName();
+
+        //memindahkan file ke folder tujuan
+        $file->move('dokumen',$file->getClientOriginalName());
+
+
+        $upload = new Laporan();
+        $upload->file       = $nama_file;
+
+        //menyimpan data ke database
+        $upload->save();
+
+        //kembali ke halaman sebelumnya
+        return back();
     }
 
     /**
