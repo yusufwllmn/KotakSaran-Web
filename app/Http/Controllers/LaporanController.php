@@ -10,6 +10,7 @@ use App\Models\Pelapor;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LaporanController extends Controller
 {
@@ -41,12 +42,11 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_laporan' => 'required',
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
             'id_status' => 'required',
-            'dokumen' => 'required',
+            'dokumen' => 'required|mimes:png,jpg,jpeg|max:2048',
             'id_pelapor' => 'required',
         ]);
 
@@ -55,27 +55,18 @@ class LaporanController extends Controller
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
-            'id_status' => $request->id_status,
-            'id_pelapor' => $request->id_pelapor
+            'id_status' => 'dalam antrian',
+            'id_pelapor' => Auth::user()->id_user
         ]);
 
-        //mengambil data file yang diupload
-        $file           = $request->file('dokumen');
-        //mengambil nama file
-        $nama_file      = $file->getClientOriginalName();
+        $photo  = $request->file('photo');
+        $filename   = date('Y-m-d').$photo->getClientOriginalName();
+        $path   = 'dokumen/'.$filename;
 
-        //memindahkan file ke folder tujuan
-        $file->move('dokumen',$file->getClientOriginalName());
+        Storage::disk('public')->put($path,file_get_contents($photo));
 
 
-        $upload = new Laporan();
-        $upload->file       = $nama_file;
-
-        //menyimpan data ke database
-        $upload->save();
-
-        //kembali ke halaman sebelumnya
-        return back();
+        return redirect()->view('pelapor.laporan');
     }
 
     /**
