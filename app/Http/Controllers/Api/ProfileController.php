@@ -19,7 +19,7 @@ class ProfileController extends Controller
                 'user',
                 ])
                 ->where('id_user', $user->id_user)
-                ->get();
+                ->first();
 
             return response()->json([
                 'pelapor' => $pelapor
