@@ -41,32 +41,29 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->file('dokumen')->store('dokumen');
+
         $this->validate($request, [
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
             'id_status' => 'required',
-            'dokumen' => 'required|mimes:png,jpg,jpeg|max:2048',
-            'id_pelapor' => 'required',
+            'dokumen' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
 
+        $image = $request->file('dokumen');
+        $image->storeAs('public/dokumen', $image->hashName());
+
         Laporan::create([
-            'id_laporan' => $request->id_laporan,
+            'dokumen' => $image->hashName(),
+            'id_pelapor' => Auth::user()->id_user,
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
-            'id_status' => 'dalam antrian',
-            'id_pelapor' => Auth::user()->id_user
+            'id_status' => 'dalam antrian'
         ]);
-
-        $photo  = $request->file('photo');
-        $filename   = date('Y-m-d').$photo->getClientOriginalName();
-        $path   = 'dokumen/'.$filename;
-
-        Storage::disk('public')->put($path,file_get_contents($photo));
-
-
-        return redirect()->view('pelapor.laporan');
+        
+        return redirect()->route('laporan.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
