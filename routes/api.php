@@ -28,6 +28,8 @@ Route::post('/login', ['App\Http\Controllers\Api\AuthController', 'login']);
 Route::post('/register', ['App\Http\Controllers\Api\AuthController', 'register']);
 
 Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/autologin', ['App\Http\Controllers\Api\AuthController', 'autoLogin']);
+
     Route::get('/riwayat', ['App\Http\Controllers\Api\RiwayatController', 'index']);
     Route::get('/riwayat/{id_laporan}', ['App\Http\Controllers\Api\RiwayatController', 'show']);
 
@@ -35,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/laporan', ['App\Http\Controllers\Api\LaporanController', 'store']);
 
     Route::get('/profile', ['App\Http\Controllers\Api\ProfileController', 'index']);
-    Route::put('/profile/{id}', ['App\Http\Controllers\Api\ProfileController', 'update']);
+    Route::put('/profile/{id_pelapor}', ['App\Http\Controllers\Api\ProfileController', 'update']);
 
-    Route::get('/logout', ['App\Http\Controllers\Api\AuthController', 'logout']);
+    Route::post('/logout', ['App\Http\Controllers\Api\AuthController', 'logout']);
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +45,31 @@ class AuthController extends Controller
         ],200);
     }
 
+    public function autoLogin(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $accessToken = $request->bearerToken();
+
+            if ($this->isValidPersonalAccessToken($user->id_user, $accessToken)) {
+                return response()->json(['message' => 'Auto-login successful', 'user' => $user]);
+            } else {
+                return response()->json(['message' => 'Invalid token for auto-login'], 401);
+            }
+        } else {
+            return response()->json(['message' => 'Auto-login failed'], 401);
+        }
+    }
+
+    private function isValidPersonalAccessToken($id_user, $token)
+    {
+        return PersonalAccessToken::where('token', $token)
+            ->where('tokenable_type', 'App\Models\User')
+            ->where('tokenable_id', $id_user)
+            ->exists();
+    }
+
     public function register(Request $request)
     {
         $user   = new User();
@@ -62,11 +88,9 @@ class AuthController extends Controller
         ],200);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens->each(function ($token) {
-            $token->delete();
-        });
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json([
             'message' => 'Successfully logged out'

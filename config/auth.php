@@ -65,6 +65,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'personal_access_token' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\CustomPersonalAccessToken::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
