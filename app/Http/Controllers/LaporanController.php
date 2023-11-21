@@ -41,8 +41,6 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->file('dokumen')->store('dokumen');
-
         $this->validate($request, [
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
@@ -51,16 +49,20 @@ class LaporanController extends Controller
             'dokumen' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
 
+        if($request->file('dokumen')) {
+            $this['dokumen'] = $request->file('dokumen')->store('dokumen');
+        }
+
         $image = $request->file('dokumen');
         $image->storeAs('public/dokumen', $image->hashName());
 
         Laporan::create([
-            'dokumen' => $image->hashName(),
-            'id_pelapor' => Auth::user()->id_user,
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
-            'id_status' => 'dalam antrian'
+            'id_status' => 'dalam antrian',
+            'dokumen' => $image->hashName(),
+            'id_pelapor' => Auth::User()->id_user
         ]);
         
         return redirect()->route('laporan.index')->with(['success' => 'Data Berhasil Disimpan!']);

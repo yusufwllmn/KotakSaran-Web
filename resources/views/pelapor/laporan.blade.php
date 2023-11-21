@@ -18,11 +18,12 @@
             </button>
             
             <dialog id="my_modal_4" class="modal">
-            <form action="{{ Route('laporan.store')}}" method="post" class="w-full h-full max-w-7xl mt-32" enctype="multipart/form-data">
+            <form action="{{ route('laporan.store')}}" method="post" class="w-full h-full max-w-7xl mt-32" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-box w-full h-5/6 max-w-7xl bg-white z-0">
                     <h3 class="font-bold text-[#6C757D] text-center text-2xl">Laporkan</h3>
                         <div class="form-control">
+
                             <label class="label">
                                 <span class="label-text text-lg text-grey">Isi Laporan :</span>
                             </label>
@@ -31,7 +32,7 @@
                             <label class="label bg-gray">
                                 <span class="label-text text-lg text-gray">Tanggal :</span>
                             </label>
-                            <input type="date" id="tanggal_lapor" name="tanggal_lapor" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}" @readonly(true)>
+                            <input type="date" id="tanggal_lapor" name="tanggal_lapor" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}" readonly>
                             
                             <label class="label bg-gray">
                                 <span class="label-text text-lg text-gray">Tujuan Laporan :</span>

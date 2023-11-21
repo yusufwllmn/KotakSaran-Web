@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Kosan</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="./node_modules/preline/dist/preline.js"></script>
 </head>
 
 <body>
@@ -110,5 +111,7 @@
             <p>Copyright © 2023 - All right reserved by Daffa & Yusuf RPL48.STMNPBDG</p>
         </aside>
     </footer>
+    <script src="./node_modules/preline/dist/preline.js"></script>
 </body> 
+
 </html>
