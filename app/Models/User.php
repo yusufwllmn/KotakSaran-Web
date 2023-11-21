@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Petugas;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,4 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function pelapor() {
+        return $this->hasOne('App\Models\Pelapor', 'id_user', 'id_user');
+    }
 }

@@ -47,8 +47,9 @@
                             <label class="label">
                                 <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
                             </label>
-                            <input type="file" id="dokumen" name="dokumen" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" readonly />
-                            
+                            <input type="file" id="dokumen" name="dokumen" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400"/>
+        
+                            <input type="hidden" placeholder="Type here" value="{{ Auth::user()->id_user }}" name="id_pelapor" class="input input-bordered w-full max-w-xs" />
 
                             <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Laporkan</button>
                         </div>
@@ -59,17 +60,27 @@
             <table class="table table-xs bg-white rounded-none z-0" >
                 <thead>
                 <tr>
-                    <th></th> 
                     <th>Tanggal</th> 
                     <th>ID Laporan</th> 
                     <th>Pelapor</th> 
                     <th>Isi Laporan</th> 
                     <th>Gambar</th> 
                     <th>Tujuan</th>
-                    <th>Petugas</th> 
                     <th>Status</th> 
                     <th>Aksi</th>
                 </tr>
+                @foreach($laporan as $l)
+                <tr>
+                    <th>{{$l->tanggal_lapor}}</th> 
+                    <th>{{$l->id_laporan}}</th> 
+                    <th>{{$l->pelapor->nama}}</th>
+                    <th>{{$l->isi_laporan}}</th> 
+                    <th><img width="150px" src="{{ url('public/dokumen/' . $l->dokumen) }}"></th> 
+                    <th>{{$l->bagian->bagian}}</th> 
+                    <th>{{$l->status->status}}</th> 
+                    <th>Aksi</th>
+                </tr>
+                @endforeach
                 </thead> 
             </table>
         </div>

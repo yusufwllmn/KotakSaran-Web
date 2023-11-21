@@ -46,8 +46,8 @@ class LaporanController extends Controller
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
-            'id_status' => 'required',
-            'dokumen' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'dokumen' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'id_pelapor' => 'required'
         ]);
 
         $file = $request->file('dokumen');
@@ -60,9 +60,9 @@ class LaporanController extends Controller
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
-            'id_status' => 'dalam antrian',
+            'id_status' => 1,
             'dokumen' => $namafile,
-            'id_pelapor' => Auth::user()->id_user
+            'id_pelapor' => $request->id_pelapor
         ]);
 
         return redirect()->route('laporan.index')->with(['success' => 'Data Berhasil Disimpan!']);
