@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -47,28 +48,23 @@ class AuthController extends Controller
 
     public function autoLogin(Request $request)
     {
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = $request->user();
+            $authorizationHeader = $request->header("Authorization");
+            $accesstoken = str_replace("Bearer ", "", $authorizationHeader);
 
-        if ($user) {
-            $accessToken = $request->bearerToken();
-
-            if ($this->isValidPersonalAccessToken($user->id_user, $accessToken)) {
-                return response()->json(['message' => 'Auto-login successful', 'user' => $user]);
-            } else {
-                return response()->json(['message' => 'Invalid token for auto-login'], 401);
-            }
+            return response()->json([
+                'message'   => 'Auto Login Successfully',
+                'token'     => $accesstoken,
+                'user'      => $user
+            ]);
         } else {
-            return response()->json(['message' => 'Auto-login failed'], 401);
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
     }
 
-    private function isValidPersonalAccessToken($id_user, $token)
-    {
-        return PersonalAccessToken::where('token', $token)
-            ->where('tokenable_type', 'App\Models\User')
-            ->where('tokenable_id', $id_user)
-            ->exists();
-    }
 
     public function register(Request $request)
     {

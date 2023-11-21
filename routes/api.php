@@ -28,8 +28,8 @@ Route::post('/login', ['App\Http\Controllers\Api\AuthController', 'login']);
 Route::post('/register', ['App\Http\Controllers\Api\AuthController', 'register']);
 
 Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/autologin', ['App\Http\Controllers\Api\AuthController', 'autoLogin']);
-
+    Route::post('/autologin', ['App\Http\Controllers\Api\AuthController', 'autoLogin']);
+    
     Route::get('/riwayat', ['App\Http\Controllers\Api\RiwayatController', 'index']);
     Route::get('/riwayat/{id_laporan}', ['App\Http\Controllers\Api\RiwayatController', 'show']);
 

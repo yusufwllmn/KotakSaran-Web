@@ -12,11 +12,12 @@ use Mockery\CountValidator\AtMost;
 class ProfileController extends Controller
 {
 
-    public function index(){
+    public function index(Request $request){
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = $request->user();
             $pelapor = Pelapor::with([
                 'user',
+                'kategori'
                 ])
                 ->where('id_user', $user->id_user)
                 ->first();
