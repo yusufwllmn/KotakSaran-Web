@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bagian;
+use App\Models\Kategori;
 use App\Models\Laporan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,40 +12,56 @@ use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    public function index() {
-        $laporan    = Laporan::with([
-            'bagian',
-            'status',
-            'user'
-        ])->get();
+    public function index(Request $request){
+        if (Auth::check()) {
+            $user = $request->user();
+            $bagian = Bagian::all();
 
-        return response()->json([
-            'laporan'   => $laporan
-        ]);
+            return response()->json([
+                'bagian' => $bagian,
+                'user'  => $user,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
     }
 
     public function store(Request $request){
-        $laporan    = new Laporan;
+        if (Auth::check()) {
+            $laporan    = new Laporan;
+            $user = $request->user();
 
-        $request->validate([
-            'subjek_laporan'    => 'required',
-            'isi_laporan'       => 'required',
-        ]);
+            $request->validate([
+                'subjek_laporan'    => 'required',
+                'isi_laporan'       => 'required',
+                'dokumen'           => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
 
-        $laporan->subjek_laporan    = $request->subjek_laporan;
-        $laporan->isi_laporan       = $request->isi_laporan;
-        $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
-        $laporan->id_status         = 1;
-        if($request->dokumen != ''){
-            $dokumen = time().'.jpg';
-            file_put_contents('public/dokumen/'.$dokumen,base64_decode($request->dokumen));
+            $laporan->subjek_laporan    = $request->subjek_laporan;
+            $laporan->isi_laporan       = $request->isi_laporan;
+            $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
+            $laporan->id_status         = 1;
+            if ($request->has('dokumen')) {
+                $dokumen = $request->file('dokumen');
+                $dokumenPath = $dokumen->storeAs('public/dokumen', $dokumen->hashName());
+                $laporan->dokumen = $dokumenPath;
+            } else {
+                $laporan->dokumen = null;
+            }
+            $laporan->id_pelapor        = $user->id_user;
+
+            $laporan->save();
+            return response()->json([
+                'message'   => 'Laporan Telah Terkirim',
+                'laporan'   => $laporan,
+                'user'      => $user
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
-        $laporan->id_pelapor        = Auth::user()->id_user;
-
-        $laporan->save();
-        return response()->json([
-            'message'   => 'Laporan Delivered',
-            'laporan'   => $laporan
-        ]);
     }
 }
