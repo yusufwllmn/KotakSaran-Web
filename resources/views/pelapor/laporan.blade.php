@@ -47,7 +47,7 @@
                             <label class="label">
                                 <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
                             </label>
-                            <input type="file" id="dokumen" name="dokumen" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
+                            <input type="file" id="dokumen" name="dokumen" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" readonly />
                             
 
                             <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Laporkan</button>

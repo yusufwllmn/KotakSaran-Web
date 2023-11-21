@@ -10,8 +10,15 @@ class Laporan extends Model
     use HasFactory;
     protected $table        = "laporan";
     protected $primaryKey   = "id_laporan";
-    protected $fillable     = ['subjek_laporan', 'isi_laporan', 'tanggal_lapor', 'id_status', 'dokumen', 'id_pelapor'];
-
+    protected $fillable = [
+        'subjek_laporan',
+        'isi_laporan',
+        'tanggal_lapor',
+        'id_status',
+        'dokumen',
+        'id_pelapor',
+    ];
+    
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'id_pelapor');

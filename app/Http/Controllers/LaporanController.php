@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Bagian;
 use App\Models\Status;
 use App\Models\Pelapor;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -46,27 +47,27 @@ class LaporanController extends Controller
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
             'id_status' => 'required',
-            'dokumen' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'dokumen' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        if($request->file('dokumen')) {
-            $this['dokumen'] = $request->file('dokumen')->store('dokumen');
-        }
+        $file = $request->file('dokumen');
+        $namafile = time() . "_" . $file->getClientOriginalName();
 
-        $image = $request->file('dokumen');
-        $image->storeAs('public/dokumen', $image->hashName());
+        $tujuanupload = 'public/dokumen';
+        $file->move($tujuanupload, $namafile);
 
         Laporan::create([
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
             'id_status' => 'dalam antrian',
-            'dokumen' => $image->hashName(),
-            'id_pelapor' => Auth::User()->id_user
+            'dokumen' => $namafile,
+            'id_pelapor' => Auth::user()->id_user
         ]);
-        
+
         return redirect()->route('laporan.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
 
     /**
      * Display the specified resource.
