@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class RiwayatController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = $request->user();
             $laporan = Laporan::with([
                 'user',
                 'bagian',
