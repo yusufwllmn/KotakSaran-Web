@@ -56,17 +56,27 @@
             <table class="table table-xs bg-white rounded-none z-0" >
                 <thead>
                 <tr>
-                    <th></th> 
                     <th>Tanggal</th> 
                     <th>ID Laporan</th> 
                     <th>Pelapor</th> 
                     <th>Isi Laporan</th> 
                     <th>Gambar</th> 
                     <th>Tujuan</th>
-                    <th>Petugas</th> 
                     <th>Status</th> 
                     <th>Aksi</th>
                 </tr>
+                @foreach($laporan as $l)
+                <tr>
+                    <th>{{$l->tanggal_lapor}}</th> 
+                    <th>{{$l->id_laporan}}</th> 
+                    <th>{{$l->pelapor->nama}}</th>
+                    <th>{{$l->isi_laporan}}</th> 
+                    <th><img width="150px" src="{{ url('public/dokumen/' . $l->dokumen) }}"></th> 
+                    <th>{{$l->bagian->bagian}}</th> 
+                    <th>{{$l->status->status}}</th> 
+                    <th>Aksi</th>
+                </tr>
+                @endforeach
                 </thead> 
             </table>
         </div>

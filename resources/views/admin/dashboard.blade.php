@@ -78,7 +78,7 @@
                                     <img src="/images/profilelogo.png" />
                                 </div>
                                 <div>
-                                    <p class="normal-case text-l text-white">Welcome {{ Auth::user()->email }}</p>
+                                    <p class="normal-case text-l text-white">Welcome {{ Auth::user()->pelapor->nama }}</p>
                                 </div>
                             </summary>
                             <ul class="w-full rounded-none p-1 bg-base-100 z-50 ">
