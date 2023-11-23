@@ -49,4 +49,12 @@ class User extends Authenticatable
     public function pelapor() {
         return $this->hasOne('App\Models\Pelapor', 'id_user', 'id_user');
     }
+
+    public function admin() {
+        return $this->hasOne('App\Models\Admin', 'id_user', 'id_user');
+    }
+
+    public function petugas() {
+        return $this->hasOne('App\Models\Petugas', 'id_user', 'id_user');
+    }
 }
