@@ -39,7 +39,7 @@ class LaporanController extends Controller
                 'dokumen'           => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
-            $laporan->subjek_laporan    = $request->subjek_laporan;
+            $laporan->subjek_laporan    = $request->subjek_laporan; 
             $laporan->isi_laporan       = $request->isi_laporan;
             $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
             $laporan->id_status         = 1;
@@ -55,8 +55,6 @@ class LaporanController extends Controller
             $laporan->save();
             return response()->json([
                 'message'   => 'Laporan Telah Terkirim',
-                'laporan'   => $laporan,
-                'user'      => $user
             ]);
         } else {
             return response()->json([
