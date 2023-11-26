@@ -1,21 +1,23 @@
 @extends('pelapor/dashboard')
 
 @section('pelaporKonten')
-<div class="overflow-x-auto z-0 bg-white">
+    <div class="overflow-x-auto z-0 bg-white justify-center">
             <div class="hero h-20 bg-white">
-                <div class="hero-content text-center">
-                    <div class="max-w-md">
-                    <h1 class="text-4xl font-bold text-black">Data Laporan</h1>
+                <div class="hero-content text-left align-left">
+                    <div class="max-w-xl w-full">
+                    <h1 class="text-4xl font-bold text-black text-left align-left justify-start">Data Laporan {{ Auth::user()->pelapor->nama }}</h1>
+                    
                     </div>
                 </div>
             </div>
             
-            <button class="btn btn-info rounded-none btn-md text-white flex justify-end mb-2 ml-auto" onClick="my_modal_4.showModal()">
-                <div class="w-4 ">
-                    <img src="/images/add.png" />
-                </div>            
-                <p class="font-bold">TAMBAH</p>
-            </button>
+            <div class="fixed bottom-4 right-4 z-50">
+                <button class="btn btn-info rounded-none btn-md text-white flex justify-end mb-2 ml-auto rounded-xl" onClick="my_modal_4.showModal()">
+                    <div class="w-4 ">
+                        <img src="/images/add.png" />
+                    </div>            
+                </button>
+            </div>
             
             <dialog id="my_modal_4" class="modal">
             <form action="{{ route('laporan.store')}}" method="post" class="w-full h-full max-w-7xl mt-32" enctype="multipart/form-data">
@@ -57,31 +59,33 @@
             </form>
             </dialog>
 
-            <table class="table table-xs bg-white rounded-none z-0" >
-                <thead>
-                <tr>
-                    <th>Tanggal</th> 
-                    <th>ID Laporan</th> 
-                    <th>Pelapor</th> 
-                    <th>Isi Laporan</th> 
-                    <th>Gambar</th> 
-                    <th>Tujuan</th>
-                    <th>Status</th> 
-                    <th>Aksi</th>
-                </tr>
-                @foreach($laporan as $l)
-                <tr>
-                    <th>{{$l->tanggal_lapor}}</th> 
-                    <th>{{$l->id_laporan}}</th> 
-                    <th>{{$l->pelapor->nama}}</th>
-                    <th>{{$l->isi_laporan}}</th> 
-                    <th><img width="150px" src="{{ url('public/dokumen/' . $l->dokumen) }}"></th> 
-                    <th>{{$l->bagian->bagian}}</th> 
-                    <th>{{$l->status->status}}</th> 
-                    <th>Aksi</th>
-                </tr>
-                @endforeach
-                </thead> 
-            </table>
-        </div>
+            @foreach($laporan as $l)
+            <div class="flex items-center justify-center min-h-full bg-white">
+            <div class="w-5/6">
+                <div class="bg-white rounded-lg shadow-2xl p-6 mb-2">
+                <!-- Konten Card -->
+                <div class="flex w-full">
+                <div class="grid h-10 flex-grow card w-full bg-white rounded-box place-items-left ">
+                    <h1 class="text-xl font-bold text-gray-600 mb-4 text-left">{{$l->bagian->bagian}}</h1>
+                </div>
+                <div class="flex w-3/6 ">
+                    <div class="grid h-10 flex-grow w-1/6 card bg-white rounded-box place-items-center">
+                        <div class="{{ $l->status->status === 'dalam antrian' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-warning h-10 rounded-md w-5/6 p-4' : ($l->status->status === 'diterima' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-success w-5/6 rounded-md p-3' : 'badge badge-xs sm:badge-sm lg:badge-lg badge-error w-5/6 rounded-md p-4') }}">
+                        {{$l->status->status}}
+                        </div>
+                    </div>
+                    <div class="grid h-10 flex-grow w-1/6 card bg-white rounded-box place-items-center">
+                        <div class="badge badge-xs sm:badge-sm lg:badge-lg badge-outline h-10 rounded-md w-5/6 text-gray-500 p-4">
+                            {{$l->tanggal_lapor}}
+                        </div>
+                        </div>
+                </div>
+                </div>
+                
+                <p class="text-gray-700">{{$l->isi_laporan}}</p>
+                </div>
+            </div>
+            </div>
+            @endforeach
+    </div>
 @endsection

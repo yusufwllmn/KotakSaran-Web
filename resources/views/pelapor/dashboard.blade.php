@@ -59,26 +59,40 @@
                                 </div>
                             </summary>
                             <ul class="w-full rounded-none p-1 bg-base-100 z-50 ">
-                                <li>
-                                    <a>
-                                        <div class="w-5 rounded-full ">
-                                            <img src="/images/settings.png" />
-                                        </div>
-                                        Settings
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        
-                                        <div class="w-5 rounded-full ">
-                                            <img src="/images/logout.png" />
-                                        </div>
-                                        <form action="{{ route('logout') }}" method="post">
-                                        @csrf
-                                            <button type="submit" class="bg-[#1D232A] w-full text-left hover:bg-[#1D232A]" onclick="return confirm('Apakah anda ingin Logout?')">Log out</button>
+                                    <li>
+                                        <a>
+                                            <div class="w-5 rounded-full ">
+                                                <img src="/images/settings.png" />
+                                            </div>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a onclick="my_modal_5.showModal()">
+                                            <div class="w-5 rounded-full ">
+                                                <img src="/images/logout.png" />
+                                            </div>
+                                            Logout
+                                        </a>
+                                    </li>
+
+                                    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle ">
+                                    <div class="modal-box w-2/6">
+                                        <h3 class="font-bold text-lg text-center">Yakin Ingin Logout?</h3>
+                                        <div class="modal-action flex justify-center">
+                                        <a href="{{ route('logout') }}" role="button" class="btn btn-outline btn-info" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Ya
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
                                         </form>
-                                    </a>
-                                </li>
+                                        <form method="dialog">
+                                            <!-- if there is a button in form, it will close the modal -->
+                                            <button class="btn btn-outline btn-error">Tidak</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                    </dialog>
                             </ul>
                         </details>
                     </li>

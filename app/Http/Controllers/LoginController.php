@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Pelapor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,9 +38,8 @@ class LoginController extends Controller
     }
 
     public function registerPage() {
-        $datakategori  = Kategori::all();
 
-        return view('register', ['kategori'=>$datakategori]);
+        return view('register');
     }
 
     public function register(Request $request)
@@ -51,6 +51,46 @@ class LoginController extends Controller
         ]);
 
         Auth::login($user);
+        return to_route('biodataPage');
+    }
+
+    public function biodataPage(Request $request){
+        $datakategori  = Kategori::all();
+        $datauser      = User::all();
+        $datapelapor   = Pelapor::all();
+
+        return view('signup', ['kategori'=>$datakategori, 'user'=>$datauser, 'pelapor'=>$datapelapor]);
+    }
+
+    public function biodata(Request $request){
+        
+        $this->validate($request, [
+            'id_user' => 'required',
+            'id_identitas' => 'required',
+            'nama' => 'required',
+            'id_kategori' => 'required',
+            'alamat' => 'required',
+            'telephone' => 'required',
+            'avatar'=>'nullable'
+        ]);
+
+        $file = $request->file('avatar');
+        $namafile = time() . "_" . $file->getClientOriginalName();
+
+        $tujuanupload = 'avatar';
+        $file->move($tujuanupload, $namafile);
+
+        $id_pelapor = Pelapor::find($id_pelapor);
+        $id_pelapor->id_user   = $request->id_user;
+        $id_pelapor->id_identitas      = $request->id_identitas;
+        $id_pelapor->nama      = $request->nama;
+        $id_pelapor->id_kategori      = $request->id_kategori;
+        $id_pelapor->alamat      = $request->alamat;
+        $id_pelapor->telephone      = $request->telephone;
+        $id_pelapor->avatar      = $request->avatar;
+
+        $id_pelapor->save();
+
         return to_route('pelaporPage');
     }
 

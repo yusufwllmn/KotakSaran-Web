@@ -51,6 +51,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/register', [LoginController::class, 'registerPage'])->name('registerPage');
     Route::post('/register', [LoginController::class, 'register'])->name('register');
 
+    Route::get('/biodata', [LoginController::class, 'biodataPage'])->name('biodataPage');
+    Route::post('/biodata', [LoginController::class, 'biodata'])->name('biodata');
+
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::middleware(['auth'])->group(function () {

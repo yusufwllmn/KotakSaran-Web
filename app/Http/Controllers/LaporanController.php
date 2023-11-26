@@ -20,7 +20,8 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $datalaporan = Laporan::orderby('id_laporan', 'ASC')->paginate(15);
+        $user        = Auth::user()->id_user;
+        $datalaporan = Laporan::where('id_pelapor', $user)->paginate(15);
         $databagian  = Bagian::all();
         $datauser    = User::all();
         $datapelapor = Pelapor::all();

@@ -1,7 +1,7 @@
 @extends('admin/dashboard')
 
 @section('adminKonten')
-<div class="overflow-x-auto z-0 bg-white">
+<div class="overflow-x-auto z-0 bg-white ">
             <div class="hero h-20 bg-white">
                 <div class="hero-content text-center">
                     <div class="max-w-md">
@@ -9,75 +9,76 @@
                     </div>
                 </div>
             </div>
-            
-            <button class="btn btn-info rounded-none btn-md text-white flex justify-end mb-2 ml-auto" onClick="my_modal_4.showModal()">
-                <div class="w-4 ">
-                    <img src="/images/add.png" />
-                </div>            
-                <p class="font-bold">TAMBAH</p>
-            </button>
-            
-            <dialog id="my_modal_4" class="modal">
-            <form action="{{ Route('adminlaporan.store')}}" class="w-full h-full max-w-7xl mt-32">
-                @csrf
-                <div class="modal-box w-full h-5/6 max-w-7xl bg-white z-0">
-                    <h3 class="font-bold text-[#6C757D] text-center text-2xl">Laporkan</h3>
-                        <div class="form-control">
-                        <label class="label">
-                            <span class="label-text text-lg text-grey">Isi Laporan :</span>
-                        </label>
-                        <textarea id="" class="textarea textarea-bordered bordered-black border border-solid h-48 bg-white text-black" placeholder="Masukan Disini..."></textarea>
-                        </div>
-                        <label class="label bg-gray">
-                            <span class="label-text text-lg text-gray">Tanggal :</span>
-                        </label>
-                        <input type="date" id="tanggal_laporan" class="bg-[#d3d3d3] text-gray-700 h-12 input input-bordered w-full max-w-xs" value="{{ date('Y-m-d') }}" @readonly(true)>
-                        <label class="label bg-gray">
-                            <span class="label-text text-lg text-gray">Tujuan Laporan :</span>
-                        </label>
-                    
-                            <select class="select select-bordered border bordered-black border-solid bg-white w-full max-w-xs" id="subjek_laporan" name="subjek">
-                                <option disabled selected>Pilih Tujuan Laporan</option>
-                                @foreach($subjek as $s)
-                                    <option value="{{ $s->id_bagian }}">{{ $s->bagian }}</option>
-                                @endforeach
-                            </select>
 
-                        
-                        <label class="label">
-                            <span class="label-text text-lg text-grey">Dokumentasi Laporan :</span>
-                        </label>
-                        <input type="file" class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-sm cursor-pointer bg-white dark:text-white-400 focus:outline-none dark:bg-white-700 dark:border-white-600 dark:placeholder-white-400" />
-                        <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Submit</button>
-                </div>
-            </form>
-            </dialog>
-
-            <table class="table table-xs bg-white rounded-none z-0" >
-                <thead>
-                <tr>
-                    <th>Tanggal</th> 
-                    <th>ID Laporan</th> 
-                    <th>Pelapor</th> 
-                    <th>Isi Laporan</th> 
-                    <th>Gambar</th> 
-                    <th>Tujuan</th>
-                    <th>Status</th> 
-                    <th>Aksi</th>
-                </tr>
-                @foreach($laporan as $l)
-                <tr>
-                    <th>{{$l->tanggal_lapor}}</th> 
-                    <th>{{$l->id_laporan}}</th> 
-                    <th>{{$l->pelapor->nama}}</th>
-                    <th>{{$l->isi_laporan}}</th> 
-                    <th><img width="150px" src="{{ url('public/dokumen/' . $l->dokumen) }}"></th> 
-                    <th>{{$l->bagian->bagian}}</th> 
-                    <th>{{$l->status->status}}</th> 
-                    <th>Aksi</th>
-                </tr>
-                @endforeach
-                </thead> 
-            </table>
+            <div class="card w-full bg-white shadow-2xl">
+            <div class="card-body">
+            <div class="relative overflow-x-auto rounded-md">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                No
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tanggal
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Pelapor
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Isi Laporan
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Gambar
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Tujuan
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach($laporan as $l)
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$l->id_laporan}}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{$l->tanggal_lapor}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$l->pelapor->nama}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$l->isi_laporan}}
+                            </td>
+                            <td class="px-6 py-4">
+                                <img src="/images/gambar.png">
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$l->bagian->bagian}}
+                            </td>
+                            <td class="flex justify-center mt-3 ml-4 {{ $l->status->status === 'dalam antrian' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-warning h-10 rounded-md w-4/6 p-4' : ($l->status->status === 'diterima' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-success w-4/6 rounded-md p-4' : 'badge badge-xs sm:badge-sm lg:badge-lg badge-error w-4/6 rounded-md p-4') }}">
+                                {{$l->status->status}}
+                            </td>
+                            <td>
+                                <button class="btn btn-info rounded btn-sm text-white flex justify-center ml-5" onClick="my_modal_4.showModal()">
+                                    <div class="w-4 ">
+                                        <img src="/images/mata.png" />
+                                    </div>            
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    @endforeach
+                </table>
+            </div>
+            </div>
+            
         </div>
 @endsection
