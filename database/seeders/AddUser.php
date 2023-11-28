@@ -16,10 +16,16 @@ class AddUser extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        User::create([[
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'roles' => 'admin'
+        ],
+        [
+            'email' => 'petugas@gmail.com',
+            'password' => Hash::make('petugas123'),
+            'roles' => 'petugas'
+        ]
         ]);
     }
 }

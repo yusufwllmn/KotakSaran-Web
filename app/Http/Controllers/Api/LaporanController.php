@@ -39,14 +39,16 @@ class LaporanController extends Controller
                 'dokumen'           => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
-            $laporan->subjek_laporan    = $request->subjek_laporan; 
+            $laporan->subjek_laporan    = $request->subjek_laporan;
             $laporan->isi_laporan       = $request->isi_laporan;
             $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
             $laporan->id_status         = 1;
             if ($request->has('dokumen')) {
                 $dokumen = $request->file('dokumen');
-                $dokumenPath = $dokumen->storeAs('public/dokumen', $dokumen->hashName());
-                $laporan->dokumen = $dokumenPath;
+                $namafile = time() . "_" . $dokumen->getClientOriginalName();
+                $laporan->dokumen = $namafile;
+                $tujuanupload = 'public/dokumen';
+                $dokumen->move($tujuanupload, $namafile);
             } else {
                 $laporan->dokumen = null;
             }

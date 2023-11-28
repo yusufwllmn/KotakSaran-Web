@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 use App\Models\Pelapor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,9 +39,6 @@ class ProfileController extends Controller
         $this->validate($request,[
             'id_identitas'  => 'required',
             'nama'          => 'required',
-            'id_kategori'   => 'required',
-            'alamat'        => 'required',
-            'telephone'     => 'required',
         ]);
 
         if(!Auth::check()){
@@ -58,5 +56,21 @@ class ProfileController extends Controller
         return response()->json([
             'message'   => 'Updated'
         ]);
+    }
+
+    public function kategori(Request $request){
+        if (Auth::check()) {
+            $user = $request->user();
+            $kategori = Kategori::all();
+
+            return response()->json([
+                'kategori'  => $kategori,
+                'user'      => $user
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
     }
 }

@@ -27,10 +27,13 @@ return new class extends Migration
             ['bagian'    => 'TPTU'],
             ['bagian'    => 'IOP'],
             ['bagian'    => 'MEKA'],
+            ['bagian'    => 'OSIS MPK'],
             ['bagian'    => 'Sarana Prasarana'],
             ['bagian'    => 'Kurikulum'],
-            ['bagian'    => 'OSIS MPK'],
-            ]);
+            ['bagian'    => 'Hubin'],
+            ['bagian'    => 'Kesiswaan'],
+            ['bagian'    => 'Tata Usaha'],
+        ]);
     }
 
     /**

@@ -29,12 +29,14 @@ Route::post('/register', ['App\Http\Controllers\Api\AuthController', 'register']
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/autologin', ['App\Http\Controllers\Api\AuthController', 'autoLogin']);
-    
+
     Route::get('/riwayat', ['App\Http\Controllers\Api\RiwayatController', 'index']);
     Route::get('/riwayat/{id_laporan}', ['App\Http\Controllers\Api\RiwayatController', 'show']);
 
     Route::get('/laporan', ['App\Http\Controllers\Api\LaporanController', 'index']);
     Route::post('/laporan', ['App\Http\Controllers\Api\LaporanController', 'store']);
+
+    Route::get('/kategori', ['App\Http\Controllers\Api\ProfileController', 'kategori']);
 
     Route::get('/profile', ['App\Http\Controllers\Api\ProfileController', 'index']);
     Route::put('/profile/{id_pelapor}', ['App\Http\Controllers\Api\ProfileController', 'update']);

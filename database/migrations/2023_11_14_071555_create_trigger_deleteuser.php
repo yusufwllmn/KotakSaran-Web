@@ -17,12 +17,12 @@ return new class extends Migration
             BEGIN
                 DECLARE peran VARCHAR(20);
                 SELECT role INTO peran FROM user WHERE user.id_user = OLD.id_user;
-        
-                IF peran = `pelapor` THEN
+
+                IF peran = "pelapor" THEN
                     DELETE FROM pelapor WHERE id_user = OLD.id_user;
-                ELSEIF peran = `admin` THEN
+                ELSEIF peran = "admin" THEN
                     DELETE FROM admin WHERE id_user = OLD.id_user;
-                ELSEIF peran = `petugas` THEN
+                ELSEIF peran = "petugas" THEN
                     DELETE FROM petugas WHERE id_user = OLD.id_user;
                 END IF;
             END
