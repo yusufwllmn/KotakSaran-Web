@@ -20,8 +20,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $user        = Auth::user()->id_user;
-        $datalaporan = Laporan::where('id_pelapor', $user)->paginate(15);
+        $datalaporan = Laporan::where('id_pelapor', auth()->id())->latest()->paginate(10);
         $databagian  = Bagian::all();
         $datauser    = User::all();
         $datapelapor = Pelapor::all();
@@ -47,14 +46,14 @@ class LaporanController extends Controller
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
-            'dokumen' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'dokumen' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'id_pelapor' => 'required'
         ]);
 
         $file = $request->file('dokumen');
         $namafile = time() . "_" . $file->getClientOriginalName();
 
-        $tujuanupload = 'public/dokumen';
+        $tujuanupload = 'dokumen';
         $file->move($tujuanupload, $namafile);
 
         Laporan::create([

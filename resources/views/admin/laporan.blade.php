@@ -14,7 +14,7 @@
             <div class="card-body">
             <div class="relative overflow-x-auto rounded-md">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 No
@@ -42,11 +42,11 @@
                             </th>
                         </tr>
                     </thead>
-                    @foreach($laporan as $l)
+                    @foreach($laporan as $index=>$l)
                     <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{$l->id_laporan}}
+                        <tr class="bg-white border-b dark:bg-gray-200 dark:border-gray-400 text-black">
+                            <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black">
+                                {{ $index + $laporan->firstItem() }}
                             </th>
                             <td class="px-6 py-4">
                                 {{$l->tanggal_lapor}}
@@ -78,6 +78,8 @@
                     @endforeach
                 </table>
             </div>
+            <br/>
+                    {{ $laporan->links() }}
             </div>
             
         </div>

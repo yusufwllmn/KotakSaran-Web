@@ -54,7 +54,7 @@
                             <div class="w-7 rounded-full ">
                                 <img src="/images/guru.png" />
                             </div>
-                            Guru
+                            Staff Sekolah
                         </a>
                     </li>
                     <li>

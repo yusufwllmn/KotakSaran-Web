@@ -24,6 +24,9 @@
                 @csrf
                 <div class="modal-box w-full h-5/6 max-w-7xl bg-white z-0">
                     <h3 class="font-bold text-[#6C757D] text-center text-2xl">Laporkan</h3>
+                    <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
                         <div class="form-control">
 
                             <label class="label">
@@ -53,7 +56,10 @@
         
                             <input type="hidden" placeholder="Type here" value="{{ Auth::user()->id_user }}" name="id_pelapor" class="input input-bordered w-full max-w-xs" />
 
-                            <button type="submit" class="btn btn-info text-white flex justify-end mb-2 ml-auto">Laporkan</button>
+                            <button type="submit" class="btn btn-info text-white flex justify-end ml-auto">Laporkan</button>
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
                         </div>
                 </div>
             </form>
@@ -70,7 +76,7 @@
                 </div>
                 <div class="flex w-3/6 ">
                     <div class="grid h-10 flex-grow w-1/6 card bg-white rounded-box place-items-center">
-                        <div class="{{ $l->status->status === 'dalam antrian' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-warning h-10 rounded-md w-5/6 p-4' : ($l->status->status === 'diterima' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-success w-5/6 rounded-md p-3' : 'badge badge-xs sm:badge-sm lg:badge-lg badge-error w-5/6 rounded-md p-4') }}">
+                        <div class="{{ $l->status->status === 'dalam antrian' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-warning h-10 rounded-md w-5/6 p-4' : ($l->status->status === 'diterima' ? 'badge badge-xs sm:badge-sm lg:badge-lg badge-success w-5/6 rounded-md p-4' : 'badge badge-xs sm:badge-sm lg:badge-lg badge-error w-5/6 rounded-md p-4') }}">
                         {{$l->status->status}}
                         </div>
                     </div>
@@ -87,5 +93,8 @@
             </div>
             </div>
             @endforeach
+            <br/>
+                    {{ $laporan->links() }}
+            <br>
     </div>
 @endsection
