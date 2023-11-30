@@ -23,6 +23,9 @@ return new class extends Migration
             ],
             [
                 'kategori'      => 'Siswa'
+            ],
+            [
+                'kategori'      => 'Pengunjung'
             ]
             ]);
     }
