@@ -11,15 +11,15 @@ class KategoriSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        DB::table('kategori')->insert([
-        [
-            'kategori'      => 'School Staff'
-        ],
-        [
-            'kategori'      => 'Student'
-        ]
-        ]);
-    }
+    // public function run(): void
+    // {
+    //     DB::table('kategori')->insert([
+    //     [
+    //         'kategori'      => 'School Staff'
+    //     ],
+    //     [
+    //         'kategori'      => 'Student'
+    //     ]
+    //     ]);
+    // }
 }

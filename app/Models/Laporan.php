@@ -21,12 +21,7 @@ class Laporan extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'id_user');
-    }
-
-    public function pelapor()
-    {
-        return $this->belongsTo('App\Models\Pelapor', 'id_pelapor');
+        return $this->belongsTo('App\Models\User', 'id_pelapor');
     }
 
     public function bagian()

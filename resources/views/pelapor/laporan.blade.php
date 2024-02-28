@@ -5,14 +5,14 @@
             <div class="hero h-20 bg-white">
                 <div class="hero-content text-left align-left">
                     <div class="max-w-xl w-full">
-                    <h1 class="text-4xl font-bold text-black text-left align-left justify-start">Data Laporan {{ Auth::user()->pelapor->nama }}</h1>
+                    <h1 class="text-4xl font-bold text-black text-left align-left justify-start">Data Laporan</h1>
                     
                     </div>
                 </div>
             </div>
             
             <div class="fixed bottom-4 right-4 z-50">
-                <button class="btn btn-info rounded-none btn-md text-white flex justify-end mb-2 ml-auto rounded-xl" onClick="my_modal_4.showModal()">
+                <button class="btn btn-info btn-md text-white flex justify-end mb-2 ml-auto rounded-xl" onClick="my_modal_4.showModal()">
                     <div class="w-4 ">
                         <img src="/images/add.png" />
                     </div>            
@@ -87,9 +87,10 @@
                         </div>
                 </div>
                 </div>
-                
                 <p class="text-gray-700">{{$l->isi_laporan}}</p>
+                
                 </div>
+                
             </div>
             </div>
             @endforeach

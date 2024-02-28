@@ -96,8 +96,11 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Laporan $laporan)
+    public function destroy($id_laporan)
     {
-        //
+        $datalaporan=Laporan::find($id_laporan);
+        $datalaporan->delete();
+
+        return redirect()->back();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Laporan;
 use App\Models\User;
 use App\Models\Bagian;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,8 +16,9 @@ class AdminlaporanController extends Controller
         $datalaporan = Laporan::orderby('id_laporan', 'ASC')->paginate(10);
         $databagian  = Bagian::all();
         $datauser    = User::all();
+        $datastatus  = Status::whereIn('status', ['diterima', 'ditolak'])->get();
 
-        return view('admin.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser]);
+        return view('admin.laporan',['laporan'=>$datalaporan, 'subjek'=>$databagian, 'user'=>$datauser, 'status'=>$datastatus]);
     }
 
     /**
@@ -34,22 +36,25 @@ class AdminlaporanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_laporan' => 'required',
             'subjek_laporan' => 'required',
             'isi_laporan' => 'required',
             'tanggal_lapor' => 'required',
-            'id_status' => 'required',
-            'dokumen' => 'required',
+            'dokumen' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'id_pelapor' => 'required'
         ]);
 
+        $file = $request->file('dokumen');
+        $namafile = time() . "_" . $file->getClientOriginalName();
+
+        $tujuanupload = 'dokumen';
+        $file->move($tujuanupload, $namafile);
+
         Laporan::create([
-            'id_laporan' => $request->id_laporan,
             'subjek_laporan' => $request->subjek_laporan,
             'isi_laporan' => $request->isi_laporan,
             'tanggal_lapor' => $request->tanggal_lapor,
-            'id_status' => $request->id_status,
-            'dokumen' => $request->dokumen,
+            'id_status' => 1,
+            'dokumen' => $namafile,
             'id_pelapor' => $request->id_pelapor
         ]);
     }
@@ -75,24 +80,9 @@ class AdminlaporanController extends Controller
      */
     public function update($id_laporan, Request $request)
     {
-        $this->validate($request, [
-            'id_laporan' => 'required',
-            'subjek_laporan' => 'required',
-            'isi_laporan' => 'required',
-            'tanggal_lapor' => 'required',
-            'id_status' => 'required',
-            'dokumen' => 'required',
-            'id_pelapor' => 'required'
-        ]);
 
         $id_laporan = Laporan::find($id_laporan);
-        $id_laporan->id_laporan         = $request->id_laporan;
-        $id_laporan->subjek_laporan     = $request->subjek_laporan;
-        $id_laporan->isi_laporan        = $request->isi_laporan;
-        $id_laporan->tanggal_lapor      = $request->tanggal_lapor;
         $id_laporan->id_status          = $request->id_status;
-        $id_laporan->dokumen            = $request->dokumen;
-        $id_laporan->id_pelapor         = $request->id_pelapor;
 
         $id_laporan->save();
 

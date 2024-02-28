@@ -11,18 +11,18 @@ class StatusSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        DB::table('status')->insert([
-            [
-                'status'    => 'pending'
-            ],
-            [
-                'status'    => 'accepted'
-            ],
-            [
-                'status'    => 'refused'
-            ]
-        ]);
-    }
+    // public function run(): void
+    // {
+    //     DB::table('status')->insert([
+    //         [
+    //             'status'    => 'pending'
+    //         ],
+    //         [
+    //             'status'    => 'accepted'
+    //         ],
+    //         [
+    //             'status'    => 'refused'
+    //         ]
+    //     ]);
+    // }
 }

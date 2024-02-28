@@ -29,7 +29,6 @@ export default {
 
     plugins: [
         require('@tailwindcss/forms'), 
-        require('daisyui'), 
-        require('preline/plugin')],
+        require('daisyui')],
         
 };
