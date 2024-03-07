@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Bagian;
 use App\Models\Status;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class AdminlaporanController extends Controller
 {
