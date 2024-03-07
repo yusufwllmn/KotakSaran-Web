@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Pelapor;
 use App\Models\PersonalAccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function register(Request $request)
     {
         $user   = new User();
@@ -78,6 +78,13 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->role     = 'pelapor';
         $user->save();
+
+        $pelapor = Pelapor::where('id_user', $user->id_user)->first();
+
+        if ($pelapor) {
+            $pelapor->avatar = 'default_avatar.png';
+            $pelapor->save();
+        }
 
         return response()->json([
             'message'   => 'Register Success'

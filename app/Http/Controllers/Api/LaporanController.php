@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Models\Bagian;
 use App\Models\Kategori;
@@ -36,16 +34,17 @@ class LaporanController extends Controller
             $request->validate([
                 'subjek_laporan'    => 'required',
                 'isi_laporan'       => 'required',
-                'dokumen'           => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+                'dokumen'           => 'nullable|image|mimes:jpeg,png,jpg'
             ]);
 
-            $laporan->subjek_laporan    = $request->subjek_laporan;
-            $laporan->isi_laporan       = $request->isi_laporan;
+            $laporan->subjek_laporan    = $request->input('subjek_laporan');
+            $laporan->isi_laporan       = $request->input('isi_laporan');
             $laporan->tanggal_lapor     = Carbon::now()->format('Y-m-d');
             $laporan->id_status         = 1;
-            if ($request->has('dokumen')) {
+            if ($request->hasFile('dokumen')) {
                 $dokumen = $request->file('dokumen');
-                $namafile = time() . "_" . $dokumen->getClientOriginalName();
+                $extension = pathinfo($dokumen->getClientOriginalName(), PATHINFO_EXTENSION);
+                $namafile = substr(md5(uniqid(rand(), true)), 0, 8) . '.' . $extension;
                 $laporan->dokumen = $namafile;
                 $tujuanupload = 'public/dokumen';
                 $dokumen->move($tujuanupload, $namafile);

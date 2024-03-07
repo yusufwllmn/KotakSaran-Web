@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use App\Models\User;
@@ -20,6 +18,10 @@ class RiwayatController extends Controller
                 ])
                 ->where('id_pelapor', $user->id_user)
                 ->get();
+
+            foreach($laporan as $lapor){
+                $lapor->dokumen = asset('public/dokumen/' . $lapor->dokumen);
+            }
 
             return response()->json([
                 'laporan' => $laporan
