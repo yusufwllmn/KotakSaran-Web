@@ -101,17 +101,17 @@
                                                     <h1 class="text-lg mb-2">: {{$l->user->email}}</h1>
                                                     <h1 class="text-lg mb-2">: {{$l->bagian->bagian}}</h1>
                                                     <h1 class="text-lg mb-2">
-                                                        <select class="select text-lg select-bordered border bordered-black border-solid bg-white w-full max-w-xs" required="" id="id_status" name="id_status">
+                                                        <select class="select text-lg select-bordered border bordered-black border-solid bg-white w-full max-w-xs" required id="id_status" name="id_status">
                                                             <option disabled selected>{{$l->status->status}}</option>
                                                             @foreach($status as $s)
-                                                                <option value="{{ $s->id_bagian }}">{{ $s->status }}</option>
+                                                                <option value="{{ $s->id_status }}">{{ $s->status }}</option>
                                                             @endforeach
                                                         </select>
                                                     </h1>
                                                     <h1 class="text-lg mb-2">: {{$l->isi_laporan}}</h1>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-info text-white flex justify-end ml-auto">Laporkan</button>
+                                            <button type="submit" class="btn btn-info text-white flex justify-end ml-auto">Simpan</button>
                                         </form>
                                         
                                     </div>

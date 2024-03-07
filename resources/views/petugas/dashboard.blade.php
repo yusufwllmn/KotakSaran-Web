@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('laporan.index') }}">
+                        <a href="{{ route('petugaslaporan.index') }}">
                             <div class="w-7 rounded-full ">
                                 <img src="/images/laporan.png" />
                             </div>

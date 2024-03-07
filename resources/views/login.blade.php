@@ -12,7 +12,7 @@
                 <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div class="p-6 bg-white space-y-4 md:space-y-6 sm:p-8">
 
-                        <a href="#" class="-mt-24  flex flex-col items-center justify-center flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                        <a href="#" class="-mt-24 flex flex-col items-center justify-center flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                             <img src="{{ asset('images/logologin.png') }}" class="w-32  flex flex-col items-center justify-center">
                         </a>
                         

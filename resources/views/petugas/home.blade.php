@@ -1,6 +1,6 @@
-@extends('pelapor/dashboard')
+@extends('petugas/dashboard')
 
-@section('pelaporKonten')
+@section('petugasKonten')
 <div class="hero min-h-screen" style="background-image: url(images/stm4.jpg);">
     <div class="hero-overlay bg-opacity-60"></div>
     <div class="hero-content-overlay text-center text-neutral-content">

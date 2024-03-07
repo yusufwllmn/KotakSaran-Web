@@ -78,15 +78,19 @@ class AdminlaporanController extends Controller
      * Update the specified resource in storage.
      */
     public function update($id_laporan, Request $request)
-    {
+{
+    $id_laporan = Laporan::find($id_laporan);
 
-        $id_laporan = Laporan::find($id_laporan);
-        $id_laporan->id_status          = $request->id_status;
-
-        $id_laporan->save();
-
-        return redirect()->back();
+    if ($request->has('id_status')) {
+        $id_laporan->id_status = $request->id_status;
+    } else {
+        return;
     }
+
+    $id_laporan->save();
+
+    return redirect()->back();
+}
 
     /**
      * Remove the specified resource from storage.

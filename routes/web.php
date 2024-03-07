@@ -59,11 +59,11 @@ use Illuminate\Support\Facades\Route;
     Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         if(Auth::user()->role == 'pelapor'){
-            return redirect('/dashboard/');
+            return redirect('/dashboard');
         } else if(Auth::user()->role == 'petugas'){
-            return redirect('/petugas/');
+            return redirect('/petugas');
         } else if(Auth::user()->role == 'admin'){
-            return redirect('/admin/');
+            return redirect('/admin');
         }else{
             return redirect('/');
         }
@@ -77,21 +77,21 @@ use Illuminate\Support\Facades\Route;
         Route::post('/laporan', [LaporanController::class, 'store'])->name('laporan.store');
         Route::get('/laporan/{id_laporan}', [LaporanController::class, 'show'])->name('laporan.show');
 
-        Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
-        Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
+        // Route::get('/profile/{id_user}', [ProfileController::class, 'show'])->name('profile.index');
+        // Route::put('/profile/{id_user}', [ProfileController::class, 'update'])->name('profile.update');
     });
 
-    // Route::middleware(['role:petugas'])->group(function() {
-    //     Route::get('/petugas/', [PetugasController::class, 'index'])->name('petugasPage');
+    Route::middleware(['role:petugas'])->group(function() {
+        Route::get('/petugas', [PetugasController::class, 'index'])->name('petugasPage');
 
-    //     Route::get('/petugas/laporan', [PetugaslaporanController::class, 'index'])->name('petugaslaporan.index');
-    //     Route::get('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'show'])->name('petugaslaporan.show');
-    //     Route::put('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'update'])->name('petugaslaporan.update');
+        Route::get('/petugas/laporan', [PetugaslaporanController::class, 'index'])->name('petugaslaporan.index');
+        Route::get('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'show'])->name('petugaslaporan.show');
+        Route::put('/petugas/laporan/{id_laporan}', [PetugaslaporanController::class, 'update'])->name('petugaslaporan.update');
 
-    //     Route::get('/petugas/profile/{id_user}', [PetugasprofileController::class, 'show'])->name('petugasprofile.show');
-    //     Route::put('/petugas/profile/{id_user}', [PetugasprofileController::class, 'update'])->name('petugasprofile.update');
+        // Route::get('/petugas/profile/{id_user}', [PetugasprofileController::class, 'show'])->name('petugasprofile.show');
+        // Route::put('/petugas/profile/{id_user}', [PetugasprofileController::class, 'update'])->name('petugasprofile.update');
 
-    // });
+    });
 
         Route::middleware(['role:admin'])->group(function() {
         Route::get('/admin', [AdminController::class, 'index'])->name('adminPage');
